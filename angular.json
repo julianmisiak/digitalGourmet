@@ -27,8 +27,10 @@
               "node_modules/materialize-css/dist/css/materialize.min.css",
               "node_modules/@mdi/font/css/materialdesignicons.min.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": ["node_modules/jquery/dist/jquery.min.js",
+                        "node_modules/materialize-css/dist/js/materialize.min.js"],
+            "es5BrowserSupport": true,
+
           },
           "configurations": {
             "production": {
