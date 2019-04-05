@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AutenticationService} from '../services/autentication.service';
 import {Router} from '@angular/router';
-import {log} from 'util';
-import {AuthService} from '../../utils/auth.service';
+import {AuthService} from '../services/auth.service';
 import {LocalStorageService} from '../../utils/local-storage.service';
 
 @Component({
@@ -11,28 +9,28 @@ import {LocalStorageService} from '../../utils/local-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  email: string = null;
+  user: string = null;
   password: string = null;
 
-  constructor(private auteticationService: AutenticationService, private router: Router, private authService: AuthService,
+  constructor(private router: Router, private authService: AuthService,
               private localStorageService: LocalStorageService) {
   }
 
-  login() {
-    console.log('this.localStorageService.getItemData(LocalStorageService.TOKEN): ' + this.localStorageService.getItemData(LocalStorageService.TOKEN));
+  public login() {
     if (this.localStorageService.getItemData(LocalStorageService.TOKEN)) {
       console.log('está logueado');
+      this.localStorageService.removeStorage(LocalStorageService.TOKEN);
     } else {
-      this.authService.login().subscribe(
-        () => {
+      this.authService.login(this.user, this.password).subscribe(
+        (data) => {
           console.log('está logueado');
         },
-        (error) => {
+        (error: Response) => {
+          alert(error.status);
           console.log(error);
         }
       );
     }
-
   }
 
   ngOnInit() {
