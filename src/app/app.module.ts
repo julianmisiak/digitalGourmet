@@ -8,6 +8,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {MaterializeModule, MzInputModule, MzValidationModule} from 'ngx-materialize';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {LocalStorageService} from '../utils/local-storage.service';
+import {HttpHeaderService} from '../utils/http-header.service';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -34,7 +37,9 @@ const appRoutes: Routes = [
     MzInputModule,
     MzValidationModule,
   ],
-  providers: [],
+    providers: [
+      { provide: LocationStrategy, useClass: HashLocationStrategy }, LocalStorageService, HttpHeaderService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
