@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../services/auth.service';
-import {LocalStorageService} from '../../utils/local-storage.service';
+import {AuthService, TokenWrapper} from '../../services/auth.service';
+import {LocalStorageService} from '../../../utils/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +9,8 @@ import {LocalStorageService} from '../../utils/local-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: string = null;
-  password: string = null;
+  userName: string;
+  password: string;
 
   constructor(private router: Router, private authService: AuthService,
               private localStorageService: LocalStorageService) {
@@ -18,16 +18,17 @@ export class LoginComponent implements OnInit {
 
   public login() {
     if (this.localStorageService.getItemData(LocalStorageService.TOKEN)) {
-      console.log('está logueado');
-      this.localStorageService.removeStorage(LocalStorageService.TOKEN);
+      this.router.navigate(['home']);
     } else {
-      this.authService.login(this.user, this.password).subscribe(
-        (data) => {
-          console.log('está logueado');
+      this.authService.login(this.userName, this.password).subscribe(
+        (response: TokenWrapper) => {
+          console.log('response.token: ' + response.token);
+          this.localStorageService.saveDataInStorage(LocalStorageService.TOKEN, response.token);
+          this.router.navigateByUrl('/home');
         },
-        (error: Response) => {
+        (error) => {
           alert(error.status);
-          console.log(error);
+          console.log(JSON.stringify(error));
         }
       );
     }

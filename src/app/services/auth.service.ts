@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {LocalStorageService} from '../../utils/local-storage.service';
 import {environment} from '../environments/environment';
+import {Router} from "@angular/router";
 
 
 export class TokenWrapper {
@@ -15,32 +16,27 @@ export class TokenWrapper {
 })
 export class AuthService {
 
-  constructor(public http: HttpClient, private localStorageService: LocalStorageService) {
+  constructor(public http: HttpClient, private localStorageService: LocalStorageService, private router: Router) {
   }
 
-  public login(userParam: string, passwordParam: string): Observable<TokenWrapper> {
+  public login(userNameParam: string, passwordParam: string): Observable<TokenWrapper> {
+    console.log('user: ' + userNameParam);
     const baseUrl = environment.apiUrl;
     // @ts-ignore
 
     return this.http.post<TokenWrapper>(`${baseUrl}/login`,
       {
-        username: 'Administrador',
-        password: '12345'
-      }).pipe(
-      tap((response: TokenWrapper) => this.localStorageService.saveDataInStorage(LocalStorageService.TOKEN, response.token)),
-      catchError(this.handlerError('login', []))
-    );
-  }
-
-  private handlerError<T>(operation: string, result?: T) {
-    console.error( JSON.stringify('error.message: ' + operation));
-    return (error: Response): Observable<T> => {
-      console.error(`${operation} failed: ${JSON.stringify(error)}`);
-      return of(result as T);
-    };
+        username: userNameParam,
+        password: passwordParam
+      });
   }
 
   public getStatus() {
     return this.localStorageService.getItemData(LocalStorageService.TOKEN);
+  }
+
+  public closeSession() {
+    this.localStorageService.removeStorage(LocalStorageService.TOKEN);
+    this.router.navigate(['login']);
   }
 }

@@ -1,4 +1,5 @@
 <body ng-app="mainModule" ng-controller="mainController">
+<h3>Digital Gourmet</h3>
 <div id="login-page" class="row">
   <div class="col s12 z-depth-6 card-panel">
     <form class="login-form">
@@ -7,14 +8,14 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">person</i>
-          <input  type="text" class="validate"  autocomplete="off" id="user">
+          <input  [(ngModel)]="userName"  name = 'userName' type="text" class="validate"  autocomplete="off" id="user" required>
           <label for="user">Usuario</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">lock_outline</i>
-          <input id="password" autocomplete="off" type="password">
+          <input [(ngModel)]="password" id="password"  name = 'password' autocomplete="off" type="password" required>
           <label for="password">Contraseña</label>
         </div>
       </div>

@@ -13,6 +13,8 @@ export class LocalStorageService {
   }
 
   public saveDataInStorage(key: string, value: string): void {
+    console.log('key: ' + key);
+    console.log('value: ' + value);
     localStorage.setItem(key, value);
   }
 
