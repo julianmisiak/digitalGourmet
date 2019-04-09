@@ -19,13 +19,11 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AutenticationGuardService} from './services/autentication-guard.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { BodyComponent } from './components/body/body.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserComponent } from './components/user/user.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AutenticationGuardService]},
-  {path: 'body', component: BodyComponent, canActivate : [AutenticationGuardService]},
   {path: 'home', component: HomeComponent, canActivate : [AutenticationGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'appComponent', component: AppComponent, canActivate : [AutenticationGuardService]},
@@ -38,7 +36,6 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     NavBarComponent,
-    BodyComponent,
     HomeComponent,
     UserComponent
   ],

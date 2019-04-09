@@ -1,31 +1,29 @@
-<table class="centered responsive-table">
-  <thead>
-  <tr>
-    <th>Nombre de Usuario</th>
-    <th>Creado por el Usuario</th>
-    <th>Modificado por el Usuario</th>
-  </tr>
-  </thead>
+<div class="container">
+  <table class="centered responsive-table striped bordered">
+    <thead>
+    <tr>
+      <th *ngFor="let row of displayedColumns"> {{row}}</th>
+    </tr>
+    </thead>
 
-  <tbody>
-  <tr *ngFor="let user of userList">
-    <td>{{ user.userName }}</td>
-    <td>{{ user.creationUser }}</td>
-    <td>{{ user.modificationUser }}</td>
-  </tr>
-  </tbody>
-</table>
+    <tbody>
+    <tr class="rowGrid" *ngFor="let user of userList">
+      <td>{{ user.userName }}</td>
+      <td>{{ user.creationUser }}</td>
+      <td>{{ user.modificationUser }}</td>
+    </tr>
+    </tbody>
+  </table>
 
+  <a  id="btnSave" class="waves-effect waves-light btn pink modal-trigger" (click)="userCrudModal.openModal()">Nuevo</a>
+</div>
 <!-- Modal Trigger -->
 
 <div class="section">
 
-  <h5 class="light">Basic modal</h5>
-
   <div class="row m-valign-wrapper">
 
     <div class="col s12 m3">
-      <a class="waves-effect waves-light btn modal-trigger" (click)="userCrudModal.openModal()">Nuevo</a>
 
       <mz-modal #userCrudModal>
         <mz-modal-header>
@@ -36,12 +34,14 @@
             <form class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input [(ngModel)]="user.userName" [ngModelOptions]="{standalone:true}" id="userName" type="text" class="validate" required>
+                  <input [(ngModel)]="user.userName" [ngModelOptions]="{standalone:true}" id="userName" type="text"
+                         class="validate" required>
                   <label for="userName">Nombre de Usuario</label>
                 </div>
                 <div class="input-field col s6">
                   <i class="material-icons prefix">lock_outline</i>
-                  <input [(ngModel)]="user.password" [ngModelOptions]="{standalone:true}" id="password"  name = 'password' autocomplete="off" type="password" required>
+                  <input [(ngModel)]="user.password" [ngModelOptions]="{standalone:true}" id="password" name='password'
+                         autocomplete="off" type="password" required>
                   <label for="password">Contraseña</label>
                 </div>
               </div>

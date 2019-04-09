@@ -13,6 +13,7 @@ import {MaterializeAction, MaterializeModule} from 'angular2-materialize';
 export class UserComponent implements OnInit {
   userList: User[];
   user: User;
+  displayedColumns = ['Nombre de Usuario', 'Creado por el Usuario', 'Modificado por el Usuario'];
 
   constructor(private service: UserService) {
     this.user = new User();
