@@ -12,13 +12,14 @@ import {MaterializeAction, MaterializeModule} from 'angular2-materialize';
 })
 export class UserComponent implements OnInit {
   userList: User[];
-  modalActions = new EventEmitter<string | MaterializeAction>();
+  user: User;
 
-  constructor(private userService: UserService) {
+  constructor(private service: UserService) {
+    this.user = new User();
   }
 
   ngOnInit() {
-    this.userService.getUserList().subscribe((data: User[]) => {
+    this.service.getUserList().subscribe((data: User[]) => {
       console.log(JSON.stringify(data));
       this.userList = data;
     }, (error) => {
@@ -30,5 +31,13 @@ export class UserComponent implements OnInit {
 
   alert() {
     alert('Alert');
+  }
+
+  public save() {
+    this.service.save(this.user).subscribe((data: boolean) => {
+      alert('Datos Guardados Correctamente');
+    }, (error) => {
+      alert('Hubo un error, detalle' + error);
+    });
   }
 }

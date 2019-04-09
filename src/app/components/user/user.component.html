@@ -25,24 +25,35 @@
   <div class="row m-valign-wrapper">
 
     <div class="col s12 m3">
-      <a class="waves-effect waves-light btn modal-trigger" (click)="basicModal.openModal()">Modal</a>
+      <a class="waves-effect waves-light btn modal-trigger" (click)="userCrudModal.openModal()">Nuevo</a>
 
-      <mz-modal #basicModal >
+      <mz-modal #userCrudModal>
         <mz-modal-header>
           <h4>Modal Title</h4>
         </mz-modal-header>
         <mz-modal-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input [(ngModel)]="user.userName" [ngModelOptions]="{standalone:true}" id="userName" type="text" class="validate" required>
+                  <label for="userName">Nombre de Usuario</label>
+                </div>
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">lock_outline</i>
+                  <input [(ngModel)]="user.password" [ngModelOptions]="{standalone:true}" id="password"  name = 'password' autocomplete="off" type="password" required>
+                  <label for="password">Contraseña</label>
+                </div>
+              </div>
+            </form>
+          </div>
+
         </mz-modal-content>
         <mz-modal-footer>
-          <a class="waves-effect waves-light btn" (click)="alert()" mz-modal-close>Guardar</a>
-          <a class="waves-effect waves-light btn"  mz-modal-close>Cancelar</a>
+          <a class="waves-effect waves-light btn" (click)="save()" mz-modal-close>Guardar</a>
+          <a class="waves-effect waves-light btn" mz-modal-close>Cancelar</a>
         </mz-modal-footer>
       </mz-modal>
     </div>
-
-    <p class="col s12 m9">
-      By default modal actions will scroll with the content of the modal
-    </p>
   </div>
 </div>
