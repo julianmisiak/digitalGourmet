@@ -1,4 +1,4 @@
-#btnSave{
+#btnSave {
   float: right;
 }
 
@@ -7,12 +7,13 @@
   cursor: pointer;
 }
 
-table {
+.table-container {
+  height: 300px;
   display: block;
-  height: 400px;
   overflow-y: auto;
-  margin-left:auto;
-  margin-right:auto;
-  table-layout: auto;
-
 }
+
+.table-container tr.active td {
+  background-color: rgba(25, 39, 48, 0.73) !important;
+}
+

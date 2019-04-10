@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Router} from "@angular/router";
-import {HttpHeaderService} from "../../utils/http-header.service";
-import {environment} from "../environments/environment";
-import {User} from "../model/User";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {TokenWrapper} from "./auth.service";
+import {Router} from '@angular/router';
+import {HttpHeaderService} from '../../utils/http-header.service';
+import {environment} from '../environments/environment';
+import {User} from '../model/User';
+import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {TokenWrapper} from './auth.service';
+import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,6 @@ export class UserService {
 
     }, {headers});
   }
+
+
 }

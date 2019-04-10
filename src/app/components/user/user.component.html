@@ -1,31 +1,47 @@
 <div class="container">
-  <table class="centered responsive-table striped bordered">
-    <thead>
-    <tr>
-      <th *ngFor="let row of displayedColumns"> {{row}}</th>
-    </tr>
-    </thead>
+  <div class="row">
+    <div class="l8 col offset-l2">
+      <div class="card mt-5 z-depth-5">
+        <div class="card-content ">
+          <span class="card-title">Listado de usuarios</span>
+          <table class="centered responsive-table striped bordered table-container">
+            <thead>
+            <tr>
+              <th *ngFor="let row of displayedColumns"> {{row}}</th>
+            </tr>
+            </thead>
 
-    <tbody>
-    <tr class="rowGrid" *ngFor="let user of userList">
-      <td>{{ user.userName }}</td>
-      <td>{{ user.creationUser }}</td>
-      <td>{{ user.modificationUser }}</td>
-    </tr>
-    </tbody>
-  </table>
+            <tbody>
+            <tr class="rowGrid" *ngFor="let row of userList;  let i = index" (click)="setClickedRow(row)"
+                [class.active]="row.oid == selectedRow" >
+              <td>{{ row.userName }}</td>
+              <td>{{ row.creationUser }}</td>
+              <td>{{ row.modificationUser }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class=" card-action">
+          <a id="btnSave" (click)="userCrudModal.openModal()">Nuevo</a>
+          <a id="btnDelete" *ngIf="selectedRow !== null" (click)="delete()">Eliminar</a>
+          <a id="btnUpdate" *ngIf="selectedRow !== null" (click)="userCrudModal.openModal()">Modificar</a>
+          <a></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <a  id="btnSave" class="waves-effect waves-light btn pink modal-trigger" (click)="userCrudModal.openModal()">Nuevo</a>
+  <div class="well well-lg">
+    Selected Row : <strong>{{selectedRow}}</strong>
+  </div>
+
 </div>
+
 <!-- Modal Trigger -->
-
 <div class="section">
-
   <div class="row m-valign-wrapper">
-
     <div class="col s12 m3">
-
-      <mz-modal #userCrudModal>
+      <mz-modal #userCrudModal [options]="modalOptions">
         <mz-modal-header>
           <h4>Modal Title</h4>
         </mz-modal-header>
@@ -50,8 +66,8 @@
 
         </mz-modal-content>
         <mz-modal-footer>
-          <a class="waves-effect waves-light btn" (click)="save()" mz-modal-close>Guardar</a>
-          <a class="waves-effect waves-light btn" mz-modal-close>Cancelar</a>
+          <a (click)="save()" mz-modal-close>GUARDAR</a>
+          <a mz-modal-close>CANCELAR</a>
         </mz-modal-footer>
       </mz-modal>
     </div>

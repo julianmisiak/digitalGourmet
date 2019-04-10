@@ -36,8 +36,8 @@ export class AuthService {
   }
 
   public closeSession() {
-    // this.localStorageService.removeStorage(LocalStorageService.TOKEN);
-    // this.router.navigate(['login']);
+    this.localStorageService.removeStorage(LocalStorageService.TOKEN);
+    this.router.navigate(['login']);
     const headers = this.httpHeaders.getHeaders();
     const baseUrl = environment.apiUrl;
     // @ts-ignore
