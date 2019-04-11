@@ -7,7 +7,14 @@ import {LoginComponent} from './components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
-import {MzInputModule, MzModalComponent, MzModalModule, MzValidationModule} from 'ngx-materialize';
+import {
+  MzButtonDirective,
+  MzButtonModule,
+  MzInputModule,
+  MzModalComponent,
+  MzModalModule, MzToastModule,
+  MzValidationModule
+} from 'ngx-materialize';
 import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {LocalStorageService} from '../utils/local-storage.service';
 import {HttpHeaderService} from '../utils/http-header.service';
@@ -21,6 +28,7 @@ import {AutenticationGuardService} from './services/autentication-guard.service'
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserComponent } from './components/user/user.component';
+import { UserInternalCrudComponent } from './components/user/user-internal-crud/user-internal-crud.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AutenticationGuardService]},
@@ -37,7 +45,8 @@ const appRoutes: Routes = [
     LoginComponent,
     NavBarComponent,
     HomeComponent,
-    UserComponent
+    UserComponent,
+    UserInternalCrudComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +59,8 @@ const appRoutes: Routes = [
     MzInputModule,
     MzValidationModule,
     MzModalModule,
+    MzButtonModule,
+    MzToastModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
@@ -59,11 +70,14 @@ const appRoutes: Routes = [
   exports: [
     MzInputModule,
     MzValidationModule,
+    UserInternalCrudComponent,
+
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy}, LocalStorageService, HttpHeaderService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [UserInternalCrudComponent],
 })
 export class AppModule {
 }

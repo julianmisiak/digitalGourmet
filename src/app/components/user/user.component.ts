@@ -3,8 +3,9 @@ import {UserService} from '../../services/user.service';
 import {User} from '../../model/User';
 import 'materialize-css';
 // @ts-ignore
-import {MaterializeAction, MaterializeModule} from 'angular2-materialize';
 import {AuthService} from '../../services/auth.service';
+import {MzModalService, MzToastService} from "ngx-materialize";
+import {UserInternalCrudComponent} from "./user-internal-crud/user-internal-crud.component";
 
 
 @Component({
@@ -18,27 +19,12 @@ export class UserComponent implements OnInit {
   user: User;
   displayedColumns = ['Nombre de Usuario', 'Creado por el Usuario', 'Modificado por el Usuario'];
   selectedRow: number = null;
+  isDelete = true;
 
-
-  public modalOptions: Materialize.ModalOptions = {
-    dismissible: false, // Modal can be dismissed by clicking outside of the modal
-    opacity: .5, // Opacity of modal background
-    inDuration: 600, // Transition in duration
-    outDuration: 300, // Transition out duration
-    startingTop: '100%', // Starting top style attribute
-    endingTop: '10%', // Ending top style attribute
-    ready: (modal, trigger) => { // Callback for Modal open. Modal and trigger parameters available.
-      alert('Ready');
-      console.log(modal, trigger);
-    },
-    complete: () => alert('Closed'), // Callback for Modal close
-
-  };
-
-  constructor(private service: UserService, private authService: AuthService) {
+  constructor(private service: UserService, private authService: AuthService, private modalService: MzModalService,
+              private toastService: MzToastService) {
     this.user = new User();
   }
-
 
   ngOnInit() {
     this.service.getUserList().subscribe((data: User[]) => {
@@ -57,14 +43,6 @@ export class UserComponent implements OnInit {
     }
   }
 
-  public save() {
-    this.service.save(this.user).subscribe((data: boolean) => {
-      alert('Datos Guardados Correctamente');
-    }, (error) => {
-      alert('Hubo un error, detalle' + error);
-    });
-  }
-
   public setClickedRow(user: User) {
     if (this.selectedRow !== user.oid) {
       this.selectedRow = user.oid;
@@ -75,8 +53,40 @@ export class UserComponent implements OnInit {
     }
   }
 
-
   delete() {
-    alert('Estas seguro que deseas eliminar al usuario');
+    this.toastService.show(
+      `<span>Cancelar Borrado</span>
+                <button  class="btn-flat white-text medium" onclick="changueDelete()">Cancelar</button>`,
+      4000, this.changueDelete(), () => {
+        if (this.isDelete) {
+          alert('Acá debería eliminar');
+        } else {
+          this.isDelete = true;
+          alert('Acá no haría nada');
+        }
+      });
+  }
+
+  showCallbackToast() {
+    this.toastService.show('I am a callback toast!', 4000, null, () => alert('Toast has been dismissed'));
+  }
+
+  openServiceModal() {
+    this.modalService.open(UserInternalCrudComponent, {user: this.user});
+  }
+
+  new() {
+    this.user = new User();
+    this.openServiceModal();
+  }
+
+  update() {
+    this.openServiceModal();
+  }
+
+
+  private changueDelete() {
+    this.isDelete = false;
+    return '';
   }
 }
