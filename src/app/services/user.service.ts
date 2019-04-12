@@ -3,10 +3,8 @@ import {Router} from '@angular/router';
 import {HttpHeaderService} from '../../utils/http-header.service';
 import {environment} from '../environments/environment';
 import {User} from '../model/User';
-import {HttpClient} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {TokenWrapper} from './auth.service';
-import {catchError, tap} from 'rxjs/operators';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +15,15 @@ export class UserService {
   constructor(private router: Router, private httpClient: HttpClient, private httpHeaders: HttpHeaderService) {
   }
 
-  public getUserList() {
+  public getUserList(isActive) {
     const headers = this.httpHeaders.getHeaders();
-    return this.httpClient.get<User[]>(`${this.baseUrl}/user`, {headers});
+    const params = new HttpParams().set('isActive', isActive);
+    return this.httpClient.get<User[]>(`${this.baseUrl}/user`, {params, headers});
   }
 
   public save(user: User): Observable<boolean> {
     const baseUrl = environment.apiUrl;
     const headers = this.httpHeaders.getHeaders();
-    console.log('user: ' + JSON.stringify(user));
     // @ts-ignore
     return this.httpClient.post<boolean>(`${baseUrl}/user`, {
       userName: user.userName,

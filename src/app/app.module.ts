@@ -9,7 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {
   MzButtonDirective,
-  MzButtonModule, MzCardModule,
+  MzButtonModule, MzCardModule, MzCheckboxModule,
   MzInputModule,
   MzModalComponent,
   MzModalModule, MzNavbarModule, MzToastModule,
@@ -65,6 +65,7 @@ const appRoutes: Routes = [
     MzToastModule,
     MzNavbarModule,
     MzCardModule,
+    MzCheckboxModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

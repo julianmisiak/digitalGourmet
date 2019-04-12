@@ -1,35 +1,42 @@
 <div class="container">
   <div class="row">
-    <div class="col 10 offset-s2">
-      <div class="card mt-5 z-depth-5">
-        <div class="card-content ">
-          <span class="card-title">Listado de usuarios</span>
-              <table class="highlight centered responsive-table striped bordered table-container">
-                <thead>
-                <tr>
-                  <th *ngFor="let row of displayedColumns"> {{row}}</th>
-                </tr>
-                </thead>
+    <div class="col 10 offset-s1">
+      <mz-card class="mt-5 z-depth-5">
+        <mz-card-title>
+          <h5>Listado de usuarios</h5>
+        </mz-card-title>
+        <mz-card-content>
+        <table class="highlight centered responsive-table striped bordered table-container">
+          <thead>
+          <tr>
+            <th *ngFor="let row of displayedColumns"> {{row}}</th>
+          </tr>
+          </thead>
 
-                <tbody>
-                <tr class="rowGrid" *ngFor="let row of userList;  let i = index" (click)="setClickedRow(row)"
-                    [class.active]="row.oid == selectedRow">
-                  <td>{{ row.userName }}</td>
-                  <td>{{ row.creationUser }}</td>
-                  <td>{{ row.modificationUser }}</td>
-                </tr>
-                </tbody>
-              </table>
-        </div>
-        <div class=" card-action">
+          <tbody>
+          <tr class="rowGrid" *ngFor="let row of userList;  let i = index" (click)="setClickedRow(row)"
+              [class.active]="row.oid == selectedRow">
+            <td>{{ row.userName }}</td>
+            <td>{{ row.creationUser }}</td>
+            <td>{{ row.modificationUser }}</td>
+          </tr>
+          </tbody>
+        </table>
+        </mz-card-content>
+        <mz-card-action>
           <button mz-button [flat]="true" (click)="new()">Nuevo</button>
           <button mz-button [flat]="true" *ngIf="selectedRow !== null" (click)="update()">Modificar</button>
           <button mz-button [flat]="true" *ngIf="selectedRow !== null" (click)="delete()">Eliminar</button>
-          <a></a>
-        </div>
-      </div>
+          <mz-checkbox-container align="end">
+            <input  mz-checkbox
+                   [label]="'Ver inactivos'"
+                   [filledIn]="true"
+                   type="checkbox"
+                   [(ngModel)]="isChecked"
+                   (change)="viewElementActive()" >
+          </mz-checkbox-container>
+        </mz-card-action>
+      </mz-card>
     </div>
   </div>
 </div>
-
-
