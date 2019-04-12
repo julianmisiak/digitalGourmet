@@ -1,0 +1,43 @@
+<!-- Modal Trigger -->
+<div class="section">
+  <div class="row m-valign-wrapper">
+    <div class="col s12 m3">
+      <mz-modal [options]="modalOptions">
+        <mz-modal-header>
+          <h4>Usuario</h4>
+        </mz-modal-header>
+        <mz-modal-content>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <mz-input-container>
+                    <input mz-input
+                           [(ngModel)]="user.userName"
+                           [ngModelOptions]="{standalone:true}"
+                           type="text" [validate]="true"
+                           [label]="'Nombre de usuario'">
+                  </mz-input-container>
+                </div>
+
+                <div class="input-field col s6">
+                  <mz-input-container>
+                    <input mz-input
+                           [(ngModel)]="user.password"
+                           [ngModelOptions]="{standalone:true}"
+                           type="password" [validate]="true"
+                           [label]="'Constraseña'">
+                  </mz-input-container>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mz-modal-content>
+        <mz-modal-footer>
+          <button mz-button [flat]="true" (click)="save()" mz-modal-close>Guardar</button>
+          <button mz-button [flat]="true" mz-modal-close>Cancelar</button>
+        </mz-modal-footer>
+      </mz-modal>
+    </div>
+  </div>
+</div>
