@@ -3,12 +3,11 @@
 }
 
 .rowGrid:hover {
-  background-color: #f8bbd0;
   cursor: pointer;
 }
 
 .table-container {
-  height: 300px;
+  height: 400px;
   display: block;
   overflow-y: auto;
 }
@@ -17,3 +16,7 @@
   background-color: rgba(25, 39, 48, 0.73) !important;
 }
 
+.table-container  td {
+  width:600px;
+
+}

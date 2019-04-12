@@ -1,16 +1,25 @@
-<nav>
-  <div class="nav-wrapper">
+  <mz-navbar>
     <a routerLink="/home" class="brand-logo">Digital Gourmet</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/home">Clientes</a></li>
-      <li><a routerLink="/home">Compras</a></li>
-      <li><a class="dropdown-trigger"  data-activates="dropdownAdm">Administración<i class="material-icons right">arrow_drop_down</i></a>
-      <li><a routerLink="/home">Reportes</a></li>
-      <li><a class="dropdown-trigger"  data-activates="dropdown1"><i class="material-icons right">view_module</i></a>
-      </li>
-    </ul>
-  </div>
-</nav>
+    <mz-navbar-item-container [align]="'right'">
+      <mz-navbar-item>
+        <a routerLink="/home">Clientes</a>
+      </mz-navbar-item>
+      <mz-navbar-item>
+        <a routerLink="/home">Compras</a>
+      </mz-navbar-item>
+      <mz-navbar-item>
+        <a class="dropdown-button" data-activates="dropdownAdm">Administración
+          <i class="material-icons right">arrow_drop_down</i></a>
+      </mz-navbar-item>
+      <mz-navbar-item>
+        <a routerLink="/home">Reportes</a>
+      </mz-navbar-item>
+      <mz-navbar-item>
+        <a class="dropdown-button" data-activates="dropdown1">
+          <i class="material-icons right">view_module</i></a>
+      </mz-navbar-item>
+    </mz-navbar-item-container>
+  </mz-navbar>
 
   <!-- Dropdown Structure -->
   <ul id="dropdown1" class="dropdown-content">
@@ -20,7 +29,7 @@
     <li><a (click)="closeSesion()">Salir</a></li>
   </ul>
 
-<!-- Dropdown Structure -->
-<ul id="dropdownAdm" class="dropdown-content">
-  <li><a routerLink="/user" routerLinkActive="active">Usuarios</a></li>
-</ul>
+  <!-- Dropdown Structure -->
+  <ul id="dropdownAdm" class="dropdown-content">
+    <li><a routerLink="/user" routerLinkActive="active">Usuarios</a></li>
+  </ul>

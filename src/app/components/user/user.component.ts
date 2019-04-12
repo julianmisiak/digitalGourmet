@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../model/User';
 import 'materialize-css';
@@ -6,6 +6,7 @@ import 'materialize-css';
 import {AuthService} from '../../services/auth.service';
 import {MzModalService, MzToastService} from "ngx-materialize";
 import {UserInternalCrudComponent} from "./user-internal-crud/user-internal-crud.component";
+import {CrudComponent} from "../crud/crud.component";
 
 
 @Component({
@@ -14,19 +15,24 @@ import {UserInternalCrudComponent} from "./user-internal-crud/user-internal-crud
   styleUrls: ['./user.component.css']
 })
 
-export class UserComponent implements OnInit {
+export class UserComponent extends CrudComponent implements OnInit {
   userList: User[];
   user: User;
   displayedColumns = ['Nombre de Usuario', 'Creado por el Usuario', 'Modificado por el Usuario'];
   selectedRow: number = null;
-  isDelete = true;
 
-  constructor(private service: UserService, private authService: AuthService, private modalService: MzModalService,
-              private toastService: MzToastService) {
+  constructor(public authService: AuthService, public toastService: MzToastService,
+              public service: UserService, public modalService: MzModalService) {
+    super(authService, toastService, modalService);
     this.user = new User();
   }
 
+
   ngOnInit() {
+    this.getListElement();
+  }
+
+  public getListElement() {
     this.service.getUserList().subscribe((data: User[]) => {
       console.log(JSON.stringify(data));
       this.userList = data;
@@ -34,7 +40,6 @@ export class UserComponent implements OnInit {
       this.handlerError(error);
     });
   }
-
 
   private handlerError(error: Response) {
     console.log('error.status: ' + error.status);
@@ -53,40 +58,22 @@ export class UserComponent implements OnInit {
     }
   }
 
-  delete() {
-    this.toastService.show(
-      `<span>Cancelar Borrado</span>
-                <button  class="btn-flat white-text medium" onclick="changueDelete()">Cancelar</button>`,
-      4000, this.changueDelete(), () => {
-        if (this.isDelete) {
-          alert('Acá debería eliminar');
-        } else {
-          this.isDelete = true;
-          alert('Acá no haría nada');
-        }
-      });
-  }
-
-  showCallbackToast() {
-    this.toastService.show('I am a callback toast!', 4000, null, () => alert('Toast has been dismissed'));
-  }
-
   openServiceModal() {
-    this.modalService.open(UserInternalCrudComponent, {user: this.user});
+    this.modalService.open(UserInternalCrudComponent, {user: this.user}).onDestroy(() => {
+      this.getListElement();
+    });
   }
 
-  new() {
+  public new() {
     this.user = new User();
     this.openServiceModal();
   }
 
-  update() {
+  public update() {
     this.openServiceModal();
   }
 
-
-  private changueDelete() {
-    this.isDelete = false;
-    return '';
+  public delete() {
+    super.delete();
   }
 }
