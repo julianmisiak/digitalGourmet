@@ -4,4 +4,7 @@ export class User {
   public password: string;
   public creationUser: string;
   public modificationUser: string;
+  public createTimestamp: Date ;
+  public modificationTimestamp: Date ;
+  public isActive: boolean;
 }

@@ -35,6 +35,7 @@
         </mz-modal-content>
         <mz-modal-footer>
           <button mz-button [flat]="true" (click)="save()" mz-modal-close>Guardar</button>
+          <button *ngIf="!user.isActive" (click)="saveAndActive()" mz-button [flat]="true" mz-modal-close>Activar y Guardar</button>
           <button mz-button [flat]="true" mz-modal-close>Cancelar</button>
         </mz-modal-footer>
       </mz-modal>

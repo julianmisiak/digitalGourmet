@@ -43,4 +43,8 @@ export class UserInternalCrudComponent extends MzBaseModal implements OnInit {
   ngOnInit() {
   }
 
+  public saveAndActive() {
+    this.user.isActive = true;
+    this.save();
+  }
 }

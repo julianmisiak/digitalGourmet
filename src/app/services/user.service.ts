@@ -16,21 +16,29 @@ export class UserService {
   }
 
   public getUserList(isActive) {
+    console.log(JSON.stringify('isActive: ' + isActive));
     const headers = this.httpHeaders.getHeaders();
     const params = new HttpParams().set('isActive', isActive);
     return this.httpClient.get<User[]>(`${this.baseUrl}/user`, {params, headers});
   }
 
   public save(user: User): Observable<boolean> {
-    const baseUrl = environment.apiUrl;
     const headers = this.httpHeaders.getHeaders();
+    console.log(JSON.stringify(user));
     // @ts-ignore
-    return this.httpClient.post<boolean>(`${baseUrl}/user`, {
+    return this.httpClient.post<boolean>(`${this.baseUrl}/user`, {
+      oid: user.oid,
       userName: user.userName,
-      password: user.password
-
+      password: user.password,
+      createTimestamp: user.createTimestamp,
+      creationUser: user.creationUser,
     }, {headers});
   }
 
 
+  public delete(oid: number) {
+    const headers = this.httpHeaders.getHeaders();
+    const params = new HttpParams().set('oid', oid.toString());
+    return this.httpClient.delete<boolean>(`${this.baseUrl}/user`, {params, headers});
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {MzModalService, MzToastService} from "ngx-materialize";
 
@@ -8,6 +8,9 @@ import {MzModalService, MzToastService} from "ngx-materialize";
   styleUrls: ['./crud.component.css']
 })
 export class CrudComponent implements OnInit {
+  selectedRow: number = null;
+  viewInactive: false;
+  @Output() emitEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public authService: AuthService, public toastService: MzToastService, public modalService: MzModalService) {
   }
@@ -28,5 +31,15 @@ export class CrudComponent implements OnInit {
 
   public delete() {
     this.toastService.show('Elemento eliminado', 4000);
+  }
+
+  public handlerError(error: Response) {
+    console.log('error.status: ' + error.status);
+    if (error.status === 403) {
+      this.authService.closeSession();
+    }
+  }
+
+  public viewElementActive() {
   }
 }

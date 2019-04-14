@@ -1,0 +1,56 @@
+#btnSave {
+  float: right;
+}
+
+.rowGrid:hover {
+  cursor: pointer;
+}
+
+
+.table-container tr.active td {
+  background-color: rgba(25, 39, 48, 0.73) !important;
+}
+
+.table-container {
+  height: 500px;
+  display: block;
+  overflow-y: auto;
+}
+
+.table-container td {
+  width: 500px;
+}
+
+.row-inactive  {
+ color: #b784a7;
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+
+@media screen and (max-width: 767px) {
+  .table-container {
+    height: 300px;
+    display: block;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .table-container {
+    height: 200px;
+    display: block;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .table-container {
+    height: 100px;
+    display: block;
+    overflow-y: auto;
+  }
+
+}

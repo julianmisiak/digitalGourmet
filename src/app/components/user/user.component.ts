@@ -1,8 +1,7 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../model/User';
 import 'materialize-css';
-// @ts-ignore
 import {AuthService} from '../../services/auth.service';
 import {MzModalService, MzToastService} from 'ngx-materialize';
 import {UserInternalCrudComponent} from './user-internal-crud/user-internal-crud.component';
@@ -12,7 +11,7 @@ import {CrudComponent} from '../crud/crud.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.scss']
 })
 
 export class UserComponent extends CrudComponent implements OnInit {
@@ -20,34 +19,28 @@ export class UserComponent extends CrudComponent implements OnInit {
   user: User;
   displayedColumns = ['Nombre de Usuario', 'Creado por el Usuario', 'Modificado por el Usuario'];
   selectedRow: number = null;
-  isChecked: boolean;
+  viewInactive: false;
 
   constructor(public authService: AuthService, public toastService: MzToastService,
               public service: UserService, public modalService: MzModalService) {
     super(authService, toastService, modalService);
     this.user = new User();
-    this.isChecked = false;
   }
-
 
   ngOnInit() {
-    this.getListElement(true);
+    this.getListElement();
   }
 
-  public getListElement(isActive) {
-    this.service.getUserList(isActive).subscribe((data: User[]) => {
-      console.log(JSON.stringify(data));
+  public getListElement() {
+    this.service.getUserList(!this.viewInactive).subscribe((data: User[]) => {
       this.userList = data;
     }, (error: Response) => {
       this.handlerError(error);
     });
   }
 
-  private handlerError(error: Response) {
-    console.log('error.status: ' + error.status);
-    if (error.status === 403) {
-      this.authService.closeSession();
-    }
+  public handlerError(error: Response) {
+    super.handlerError(error);
   }
 
   public setClickedRow(user: User) {
@@ -60,9 +53,9 @@ export class UserComponent extends CrudComponent implements OnInit {
     }
   }
 
-  openServiceModal() {
+  public openServiceModal() {
     this.modalService.open(UserInternalCrudComponent, {user: this.user}).onDestroy(() => {
-      this.getListElement(true);
+      this.getListElement();
     });
   }
 
@@ -76,10 +69,15 @@ export class UserComponent extends CrudComponent implements OnInit {
   }
 
   public delete() {
-    super.delete();
+    this.service.delete(this.user.oid).subscribe((data: boolean) => {
+      super.delete();
+      this.getListElement();
+    }, (error: Response) => {
+      this.handlerError(error);
+    });
   }
 
   public viewElementActive() {
-    this.getListElement(!this.isChecked);
+    this.getListElement();
   }
 }
