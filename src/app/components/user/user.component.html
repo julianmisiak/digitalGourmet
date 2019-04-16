@@ -3,37 +3,49 @@
     <div class="col s12 offset-s0  m12  l11  offset-l1  xl10 offset-xl1">
       <mz-card class="mt-5 z-depth-5">
         <mz-card-title>
-          <h5>Listado de usuarios</h5>
+
+          <div class="row">
+            <h5 class="col s6 m6">Listado de usuarios</h5>
+            <mz-input-container class="col s6 m6 crud-filter">
+              <i class="material-icons prefix">search</i>
+              <input mz-input
+                     [label]="'Filtrar'"
+                     type="text"
+                     [(ngModel)]="filterInput"
+              >
+            </mz-input-container>
+          </div>
+
         </mz-card-title>
         <mz-card-content>
-        <table class="highlight centered  striped bordered table-container">
-          <thead>
-          <tr>
-            <th *ngFor="let row of displayedColumns"> {{row}}</th>
-          </tr>
-          </thead>
+          <table class="highlight centered  striped bordered table-container">
+            <thead>
+            <tr>
+              <th *ngFor="let row of displayedColumns"> {{row}}</th>
+            </tr>
+            </thead>
 
-          <tbody>
-          <tr class="rowGrid" *ngFor="let row of userList;  let i = index" (click)="setClickedRow(row)"
-              [class.active]="row.oid == selectedRow" [ngClass]="{'row-inactive': !row.isActive}">
-            <td>{{ row.userName }}</td>
-            <td>{{ row.creationUser }}</td>
-            <td>{{ row.modificationUser }}</td>
-          </tr>
-          </tbody>
-        </table>
+            <tbody>
+            <tr class="rowGrid" *ngFor="let row of userList | filter: filterInput;  let i = index" (click)="setClickedRow(row)"
+                [class.active]="row.oid == selectedRow" [ngClass]="{'row-inactive': !row.isActive}">
+              <td>{{ row.userName }}</td>
+              <td>{{ row.creationUser }}</td>
+              <td>{{ row.modificationUser }}</td>
+            </tr>
+            </tbody>
+          </table>
         </mz-card-content>
         <mz-card-action>
           <button mz-button [flat]="true" (click)="new()">Nuevo</button>
           <button mz-button [flat]="true" *ngIf="selectedRow !== null" (click)="update()">Modificar</button>
           <button mz-button [flat]="true" *ngIf="selectedRow !== null" (click)="delete()">Eliminar</button>
           <mz-checkbox-container align="end">
-            <input  mz-checkbox
+            <input mz-checkbox
                    [label]="'Ver inactivos'"
                    [filledIn]="true"
                    type="checkbox"
                    [(ngModel)]="viewInactive"
-                   (change)="viewElementActive()" >
+                   (change)="viewElementActive()">
           </mz-checkbox-container>
         </mz-card-action>
       </mz-card>

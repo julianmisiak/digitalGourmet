@@ -20,6 +20,7 @@ export class UserComponent extends CrudComponent implements OnInit {
   displayedColumns = ['Nombre de Usuario', 'Creado por el Usuario', 'Modificado por el Usuario'];
   selectedRow: number = null;
   viewInactive: false;
+  filterInput: string = '';
 
   constructor(public authService: AuthService, public toastService: MzToastService,
               public service: UserService, public modalService: MzModalService) {

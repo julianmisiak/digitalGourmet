@@ -30,6 +30,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UserComponent } from './components/user/user.component';
 import { UserInternalCrudComponent } from './components/user/user-internal-crud/user-internal-crud.component';
 import { CrudComponent } from './components/crud/crud.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AutenticationGuardService]},
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     HomeComponent,
     UserComponent,
     UserInternalCrudComponent,
-    CrudComponent
+    CrudComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
