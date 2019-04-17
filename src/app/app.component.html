@@ -1,6 +1,9 @@
 <app-nav-bar *ngIf="router.url != '/login'"></app-nav-bar>
+<app-side-nav  *ngIf="router.url != '/login'"></app-side-nav>
 <div [ngClass]="{'generalContent': router.url != '/login'}">
   <router-outlet></router-outlet>
 </div>
+
+
 
 

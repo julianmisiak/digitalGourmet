@@ -111,3 +111,117 @@ margin right
 .mr-5, .mx-5 {
   margin-right: 3rem !important;
 }
+
+#btnSave {
+  float: right;
+}
+
+.row-grid-crud:hover {
+  cursor: pointer;
+}
+
+.table-container tr.active td {
+  background-color: rgba(3, 5, 6, 0.8) !important;
+  color: white;
+}
+
+.table-container td {
+  width: 500px;
+}
+
+.row-inactive {
+  color: #828282;
+}
+
+.table-container {
+  height: 450px;
+  display: block;
+  overflow-y: auto;
+}
+
+app-side-nav {
+  display: none;
+  background-color: #ee6e73;
+}
+
+
+input {
+  background: #e64a19;
+}
+
+
+@media screen and (max-width: 1366px) {
+  .table-container {
+    height: 200px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  app-side-nav {
+    display: none;
+  }
+
+  app-nav-bar {
+    display: block;
+  }
+
+}
+
+
+@media screen and (max-width: 767px) {
+  .table-container {
+    height: 200px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .table-container {
+    height: 200px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  * {
+    font-size: 11px;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .table-container {
+    height: 150px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  * {
+    font-size: 10px;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+
+}
+

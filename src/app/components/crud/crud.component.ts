@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
-import {MzModalService, MzToastService} from "ngx-materialize";
+import {AuthService} from '../../services/auth.service';
+import {MzModalService, MzToastService} from 'ngx-materialize';
 
 @Component({
   selector: 'app-crud',

@@ -12,7 +12,7 @@ import {
   MzButtonModule, MzCardModule, MzCheckboxModule,
   MzInputModule,
   MzModalComponent,
-  MzModalModule, MzNavbarModule, MzToastModule,
+  MzModalModule, MzNavbarModule, MzSidenavModule, MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
 import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
@@ -25,12 +25,13 @@ import {environment} from './environments/environment';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AutenticationGuardService} from './services/autentication-guard.service';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserComponent } from './components/user/user.component';
 import { UserInternalCrudComponent } from './components/user/user-internal-crud/user-internal-crud.component';
 import { CrudComponent } from './components/crud/crud.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { SideNavComponent } from './navigation/side-nav/side-nav.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AutenticationGuardService]},
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     UserComponent,
     UserInternalCrudComponent,
     CrudComponent,
-    FilterPipe
+    FilterPipe,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
     MzNavbarModule,
     MzCardModule,
     MzCheckboxModule,
+    MzSidenavModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

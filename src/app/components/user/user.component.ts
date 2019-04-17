@@ -11,7 +11,7 @@ import {CrudComponent} from '../crud/crud.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.css']
 })
 
 export class UserComponent extends CrudComponent implements OnInit {
@@ -20,7 +20,7 @@ export class UserComponent extends CrudComponent implements OnInit {
   displayedColumns = ['Nombre de Usuario', 'Creado por el Usuario', 'Modificado por el Usuario'];
   selectedRow: number = null;
   viewInactive: false;
-  filterInput: string = '';
+  filterInput = '';
 
   constructor(public authService: AuthService, public toastService: MzToastService,
               public service: UserService, public modalService: MzModalService) {
@@ -72,6 +72,7 @@ export class UserComponent extends CrudComponent implements OnInit {
   public delete() {
     this.service.delete(this.user.oid).subscribe((data: boolean) => {
       super.delete();
+      this.selectedRow = null;
       this.getListElement();
     }, (error: Response) => {
       this.handlerError(error);
