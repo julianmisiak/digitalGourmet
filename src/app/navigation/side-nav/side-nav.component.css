@@ -1,0 +1,21 @@
+.dehaze-side-nav{
+  padding: 5px;
+}
+
+.dehaze-side-nav:hover{
+  cursor: pointer;
+}
+
+.header-title{
+  font-size: medium;
+  color: black;
+  float: right;
+  padding: 5px;
+}
+
+.brand-logo{
+  height: 160px;
+  background-color: #ee6e73;
+}
+
+
