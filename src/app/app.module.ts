@@ -5,14 +5,15 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {
+  MaterializeModule,
   MzButtonDirective,
   MzButtonModule, MzCardModule, MzCheckboxModule,
-  MzInputModule,
+  MzInputModule, MzMediaModule,
   MzModalComponent,
-  MzModalModule, MzNavbarModule, MzSidenavModule, MzToastModule,
+  MzModalModule, MzNavbarModule, MzSelectModule, MzSidenavModule, MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
 import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
@@ -71,6 +72,9 @@ const appRoutes: Routes = [
     MzCardModule,
     MzCheckboxModule,
     MzSidenavModule,
+    MzMediaModule,
+    MzSelectModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

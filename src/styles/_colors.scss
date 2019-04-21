@@ -1,0 +1,60 @@
+$primary-color: #fb3e8d !default;
+$primary-color-light: #F4511E !default;
+$primary-color-dark: #BF360C !default;
+
+input :focus {
+  border-bottom: 10px solid $primary-color-dark;
+}
+
+.input-field input {
+  border-bottom: 1px solid $primary-color-dark !important;
+  box-shadow: 0 1px 0 0$primary-color-dark !important
+}
+
+.input-field input:focus {
+  border-bottom: 1px solid $primary-color-light !important;
+  box-shadow: 0 1px 0 0 $primary-color-light !important
+}
+
+.input-field button:hover {
+  background-color: $primary-color-light !important;
+}
+
+
+.material-icons{
+  color: $primary-color-dark !important;
+}
+
+.material-icons:focus {
+  color: $primary-color-dark !important;
+}
+
+.btn-flat{
+  color: $primary-color-dark!important;
+}
+
+
+.material-icons.active {
+  color: $primary-color-light !important;
+}
+
+.checkbox-crud.filled-in[type="checkbox"] + label:after{
+  border: 2px solid $primary-color-dark!important;
+  background: transparent;
+}
+.checkbox-crud.filled-in[type="checkbox"]:checked + label:after{
+  background: $primary-color-dark;
+}
+
+app-side-nav {
+  display: none;
+  background-color: $primary-color-light !important;
+}
+.row-inactive {
+  color: #828282;
+}
+
+.table-container tr.active td {
+  background-color: #323232 !important;
+  color: white;
+}

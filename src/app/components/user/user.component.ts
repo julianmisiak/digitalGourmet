@@ -11,13 +11,13 @@ import {CrudComponent} from '../crud/crud.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.scss']
 })
 
 export class UserComponent extends CrudComponent implements OnInit {
   userList: User[];
   user: User;
-  displayedColumns = ['Nombre de Usuario', 'Creado por el Usuario', 'Modificado por el Usuario'];
+  displayedColumns = ['Usuario', 'Nombre', 'Apellido', 'Email'];
   selectedRow: number = null;
   viewInactive: false;
   filterInput = '';

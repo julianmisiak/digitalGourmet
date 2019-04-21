@@ -1,44 +1,120 @@
-<!-- Modal Trigger -->
-<div class="section">
-  <div class="row m-valign-wrapper">
-    <div class="col s12 m3">
-      <mz-modal [options]="modalOptions">
-        <mz-modal-header>
-          <h4>Usuario</h4>
-        </mz-modal-header>
-        <mz-modal-content>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s6">
-                  <mz-input-container>
-                    <input mz-input
-                           [(ngModel)]="user.userName"
-                           [ngModelOptions]="{standalone:true}"
-                           type="text" [validate]="true"
-                           [label]="'Nombre de usuario'">
-                  </mz-input-container>
-                </div>
+<form [formGroup]="form" novalidate>
+  <div class="section">
+    <div class="row m-valign-wrapper">
+      <div class="col s12 m3">
+        <mz-modal [options]="modalOptions">
+          <mz-modal-header>
+            <h4>Usuario</h4>
+          </mz-modal-header>
+          <mz-modal-content>
+            <div class="row">
+              <div class="col s10 offset-s1">
+                <div class="row">
+                  <div class="input-field col s12 m6 xl6">
+                    <mz-input-container>
+                      <input mz-input mz-validation required
+                             formControlName="userName"
+                             [errorMessageResource]="errorMessages.userName"
+                             id="userName"
+                             [(ngModel)]="user.userName"
+                             type="text" [validate]="true"
+                             [label]="'Nombre de usuario'">
+                    </mz-input-container>
+                  </div>
 
-                <div class="input-field col s6">
-                  <mz-input-container>
-                    <input mz-input
-                           [(ngModel)]="user.password"
-                           [ngModelOptions]="{standalone:true}"
-                           type="password" [validate]="true"
-                           [label]="'Constraseña'">
-                  </mz-input-container>
+                  <div *ngIf="!user.oid" class="input-field col s12 m6 xl6">
+                    <mz-input-container>
+                      <input mz-input mz-validation required
+                             formControlName="password"
+                             [errorMessageResource]="errorMessages.password"
+                             id="password"
+                             [(ngModel)]="user.password"
+                             type="password" [validate]="true"
+                             [label]="'Constraseña'"
+                      >
+                    </mz-input-container>
+                  </div>
+
+                  <div class="input-field col s12 m6 xl6">
+                    <mz-input-container>
+                      <input mz-input mz-validation required
+                             formControlName="name"
+                             [errorMessageResource]="errorMessages.name"
+                             id="name"
+                             [(ngModel)]="user.name"
+                             type="text" [validate]="true"
+                             [label]="'Nombre'">
+                    </mz-input-container>
+                  </div>
+
+                  <div class="input-field   col s12 m6 xl6">
+                    <mz-input-container>
+                      <input mz-input mz-validation required
+                             formControlName="surname"
+                             [errorMessageResource]="errorMessages.surname"
+                             id="surname"
+                             [(ngModel)]="user.surname"
+                             [label]="'Apellido'">
+                    </mz-input-container>
+                  </div>
+
+                  <div class="input-field col s12 m6 xl6">
+                    <mz-input-container>
+                      <input mz-input mz-validation required minlength="8" maxlength="8"
+                             formControlName="idCard"
+                             [errorMessageResource]="errorMessages.idCard"
+                             id="idCard"
+                             type="text"
+                             [label]="'DNI'"
+                             autocomplete="off"
+                             [(ngModel)]="user.idCard"
+                      >
+                    </mz-input-container>
+                  </div>
+
+                  <div class="input-field col s12 m6 xl6">
+                    <mz-input-container>
+                      <input mz-input mz-validation required
+                             formControlName="email"
+                             [errorMessageResource]="errorMessages.email"
+                             id="email"
+                             [(ngModel)]="user.email"
+                             type="email"
+                             id="options-input"
+                             [label]="'Email'"
+                             email="true"
+                      >
+                    </mz-input-container>
+                  </div>
+                  <div class="input-field col s12 m6 xl6">
+                    <mz-select-container>
+                      <select mz-select mz-validation required
+                              formControlName="gender"
+                              [errorMessageResource]="errorMessages.gender"
+                              id="gender"
+                              [(ngModel)]="user.gender"
+                              [label]="'Sexo'"
+                              [placeholder]="'Seleccione una opción'">
+                      >
+                        <option *ngFor="let gender of keys(genders)"
+                                [ngValue]="genders[gender]"
+                        >{{gender}}</option>
+                      </select>
+                    </mz-select-container>
+                  </div>
                 </div>
               </div>
-            </form>
-          </div>
-        </mz-modal-content>
-        <mz-modal-footer>
-          <button mz-button [flat]="true" (click)="save()" mz-modal-close>Guardar</button>
-          <button *ngIf="!user.isActive" (click)="saveAndActive()" mz-button [flat]="true" mz-modal-close>Activar y Guardar</button>
-          <button mz-button [flat]="true" mz-modal-close>Cancelar</button>
-        </mz-modal-footer>
-      </mz-modal>
+            </div>
+          </mz-modal-content>
+          <mz-modal-footer>
+            <button mz-button [disabled]="!form.valid" [flat]="true" (click)="save()" mz-modal-close>Guardar</button>
+            <button *ngIf=" user.isActive !== undefined && !user.isActive" (click)="saveAndActive()" mz-button
+                    [flat]="true" mz-modal-close>Activar y Guardar
+            </button>
+            <button mz-button [flat]="true" mz-modal-close>Cancelar</button>
+          </mz-modal-footer>
+        </mz-modal>
+      </div>
     </div>
   </div>
-</div>
+</form>

@@ -1,10 +1,6 @@
-export class User {
-  public oid: number;
+import {Person} from './Person';
+
+export class User extends Person {
   public userName: string;
   public password: string;
-  public creationUser: string;
-  public modificationUser: string;
-  public createTimestamp: Date ;
-  public modificationTimestamp: Date ;
-  public isActive: boolean;
 }

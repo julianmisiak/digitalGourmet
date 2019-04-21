@@ -30,6 +30,11 @@ export class UserService {
       oid: user.oid,
       userName: user.userName,
       password: user.password,
+      name: user.name,
+      surname: user.surname,
+      idCard: user.idCard,
+      gender: user.gender,
+      email: user.email,
       createTimestamp: user.createTimestamp,
       creationUser: user.creationUser,
     }, {headers});

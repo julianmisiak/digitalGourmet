@@ -1,0 +1,31 @@
+@import '/styles/colors';
+@import '/styles/margin-padding';
+@import '/styles/responsives';
+
+* {
+  font-family: Roboto;
+}
+
+
+#btnSave {
+  float: right;
+}
+
+.row-grid-crud:hover {
+  cursor: pointer;
+}
+
+.table-container td {
+  width: 500px;
+}
+
+.table-container {
+  height: 450px;
+  display: block;
+  overflow-y: auto;
+}
+
+td, th {
+  padding: 5px 5px!important;
+}
+

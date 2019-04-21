@@ -1,0 +1,75 @@
+
+@media screen and (max-width: 1366px) {
+  .table-container {
+    height: 250px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  app-side-nav {
+    display: none;
+  }
+
+  app-nav-bar {
+    display: block;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  .table-container {
+    height: 200px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .table-container {
+    height: 200px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  * {
+    font-size: 11px;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .table-container {
+    height: 150px;
+    display: block;
+    overflow-y: auto;
+  }
+
+  * {
+    font-size: 10px;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+
+}
+
