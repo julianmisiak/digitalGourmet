@@ -1,7 +1,22 @@
 
+@media screen and (max-width: 1920px) {
+  .table-container {
+    height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  app-side-nav {
+    display: none;
+  }
+
+  app-nav-bar {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 1366px) {
   .table-container {
-    height: 250px;
+    height: 300px;
     display: block;
     overflow-y: auto;
   }

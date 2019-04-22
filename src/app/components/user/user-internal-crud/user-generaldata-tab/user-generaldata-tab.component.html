@@ -1,0 +1,109 @@
+<form [formGroup]="form" novalidate>
+<div class="row">
+  <div class="col s10 offset-s1">
+    <div class="row">
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input mz-validation required
+                 formControlName="userName"
+                 [errorMessageResource]="errorMessages.userName"
+                 id="userName"
+                 [(ngModel)]="user.userName"
+                 type="text" [validate]="true"
+                 [label]="'Nombre de usuario'"
+                 autocomplete="off">
+        </mz-input-container>
+      </div>
+
+      <div *ngIf="!user.oid" class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input mz-validation required
+                 formControlName="password"
+                 [errorMessageResource]="errorMessages.password"
+                 id="password"
+                 [(ngModel)]="user.password"
+                 type="password" [validate]="true"
+                 [label]="'Constraseña'"
+                 autocomplete="off"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input mz-validation required
+                 formControlName="name"
+                 [errorMessageResource]="errorMessages.name"
+                 id="name"
+                 [(ngModel)]="user.name"
+                 type="text" [validate]="true"
+                 [label]="'Nombre'"
+                 autocomplete="off"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field   col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input mz-validation required
+                 formControlName="surname"
+                 [errorMessageResource]="errorMessages.surname"
+                 id="surname"
+                 [(ngModel)]="user.surname"
+                 [label]="'Apellido'"
+                 autocomplete="off"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input mz-validation required minlength="8" maxlength="8"
+                 formControlName="idCard"
+                 [errorMessageResource]="errorMessages.idCard"
+                 id="idCard"
+                 type="text"
+                 [label]="'DNI'"
+                 autocomplete="off"
+                 [(ngModel)]="user.idCard"
+                 autocomplete="off"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input mz-validation required
+                 formControlName="email"
+                 [errorMessageResource]="errorMessages.email"
+                 id="email"
+                 [(ngModel)]="user.email"
+                 type="email"
+                 id="options-input"
+                 [label]="'Email'"
+                 email="true"
+                 autocomplete="off"
+          >
+        </mz-input-container>
+      </div>
+      <div class="input-field col s12 m6 xl6">
+        <mz-select-container>
+          <select mz-select mz-validation required
+                  formControlName="gender"
+                  [errorMessageResource]="errorMessages.gender"
+                  id="gender"
+                  [(ngModel)]="user.gender"
+                  [label]="'Sexo'"
+                  [placeholder]="'Seleccione una opción'"
+                  autocomplete="off"
+          >
+            <option *ngFor="let gender of keys(genders)"
+                    [ngValue]="genders[gender]"
+            >{{gender}}</option>
+          </select>
+        </mz-select-container>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
