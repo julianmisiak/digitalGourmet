@@ -16,7 +16,6 @@ export class UserService {
   }
 
   public getUserList(isActive) {
-    console.log(JSON.stringify('isActive: ' + isActive));
     const headers = this.httpHeaders.getHeaders();
     const params = new HttpParams().set('isActive', isActive);
     return this.httpClient.get<User[]>(`${this.baseUrl}/user`, {params, headers});
@@ -24,7 +23,6 @@ export class UserService {
 
   public save(user: User): Observable<boolean> {
     const headers = this.httpHeaders.getHeaders();
-    console.log(JSON.stringify(user));
     // @ts-ignore
     return this.httpClient.post<boolean>(`${this.baseUrl}/user`, {
       oid: user.oid,
@@ -37,6 +35,7 @@ export class UserService {
       email: user.email,
       createTimestamp: user.createTimestamp,
       creationUser: user.creationUser,
+      addresses: user.addresses
     }, {headers});
   }
 

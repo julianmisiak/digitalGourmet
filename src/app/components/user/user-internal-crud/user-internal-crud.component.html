@@ -1,30 +1,32 @@
-  <div class="section">
-    <div class="row m-valign-wrapper">
-      <div class="col s12 m12">
-        <mz-modal [options]="modalOptions">
-          <mz-modal-header>
-            <h4>Usuario</h4>
-          </mz-modal-header>
-          <mz-modal-content>
-            <mz-tab
-              [fixedTabWidth]="'true'"
-              [responsiveThreshold]="'true'"
-            >
-              <mz-tab-item [active]="'true'"
-                           [label]="'Datos Generales'">
-                <app-user-generaldata-tab [form]="form" [(user)]="user"></app-user-generaldata-tab>
-              </mz-tab-item>
-              <mz-tab-item  [label]="'Direcciones'">Tab 3</mz-tab-item>
-            </mz-tab>
-          </mz-modal-content>
-          <mz-modal-footer>
-            <button mz-button [flat]="true" (click)="save()" mz-modal-close>Guardar</button>
-            <button *ngIf=" user.isActive !== undefined && !user.isActive" (click)="saveAndActive()" mz-button
-                    [flat]="true" mz-modal-close>Activar y Guardar
-            </button>
-            <button mz-button [flat]="true" mz-modal-close>Cancelar</button>
-          </mz-modal-footer>
-        </mz-modal>
-      </div>
+<div class="section">
+  <div class="row m-valign-wrapper">
+    <div class="col s12 m12">
+      <mz-modal [options]="modalOptions">
+        <mz-modal-header>
+          <h4>Usuario</h4>
+        </mz-modal-header>
+        <mz-modal-content>
+          <mz-tab
+            [fixedTabWidth]="'true'"
+            [responsiveThreshold]="'true'"
+          >
+            <mz-tab-item [active]="'true'"
+                         [label]="'Datos Generales'">
+              <app-user-generaldata-tab [form]="form" [(user)]="user"></app-user-generaldata-tab>
+            </mz-tab-item>
+            <mz-tab-item [label]="'Direcciones'">
+              <app-user-address-tab [form]="form" [(user)]="user"></app-user-address-tab>
+            </mz-tab-item>
+          </mz-tab>
+        </mz-modal-content>
+        <mz-modal-footer>
+          <button mz-button [flat]="true" (click)="save()" mz-modal-close>Guardar</button>
+          <button *ngIf=" user.isActive !== undefined && !user.isActive" (click)="saveAndActive()" mz-button
+                  [flat]="true" mz-modal-close>Activar y Guardar
+          </button>
+          <button mz-button [flat]="true" mz-modal-close>Cancelar</button>
+        </mz-modal-footer>
+      </mz-modal>
     </div>
   </div>
+</div>

@@ -1,3 +1,119 @@
-<p>
-  user-address-tab works!
-</p>
+<div class="row">
+  <div class="col s10 offset-s1">
+    <div class="row">
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input
+                 id="province"
+                 (change)="onProvinceSelectChange($event.target.value)"
+                 type="text"
+                 [label]="'Provincia'"
+                 [autocomplete]="provinceList"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input
+                 id="distrito"
+                 (change)="onDiscrictSelectChange($event.target.value)"
+                 type="text"
+                 [label]="'Municipio'"
+                 [autocomplete]="districtList"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input
+                 id="location"
+                 type="text"
+                 [label]="'Localidad'"
+                 [autocomplete]="locationList"
+                 (change)="onLocationSelectChange($event.target.value)"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input
+                 id="postalCode"
+                 (change)="onPostalCodeSelectChange($event.target.value)"
+                 type="text"
+                 [label]="'Código Postal'"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input
+                 id="street"
+                 (keypress)="onStreetKeypressChange($event.target.value)"
+                 (durationchange)="onStreetSelectChange($event.target.value)"
+                 type="text"
+                 [label]="'Calle'"
+                 [autocomplete]="streetList"
+          >
+        </mz-input-container>
+      </div>
+
+      <div class="input-field col s12 m6 xl6">
+        <mz-input-container>
+          <input mz-input
+                 id="number"
+                 (change)="onNumberSelectChange($event.target.value)"
+                 type="text"
+                 [label]="'Número'"
+                 autocomplete="off"
+          >
+        </mz-input-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table-internal-crud.container">
+  <div class="row">
+    <div class="col s10">
+      <div class="table-container">
+        <table class="highlight centered striped bordered table-container">
+          <thead>
+          <tr>
+            <th *ngFor="let row of displayedColumns"> {{row}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="row-grid-crud" *ngFor="let row of user.addresses"
+              (click)="setClickedRow(row)"
+              [class.active]="row.oid == selectedRow" [ngClass]="{'row-inactive': !row.isActive}">
+            <td>{{ row.userName }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.surname }}</td>
+            <td>{{ row.email }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col s2 icons-internal-crud">
+      <div class="row">
+        <div *ngIf="!address else acceptAndCancel">
+          <i class="small icon-internal-crud material-icons col s12" (click)="new()">add_circle</i>
+          <i class="small icon-internal-crud material-icons col s12">data_usage</i>
+          <i class="small icon-internal-crud material-icons col s12">remove_circle</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #acceptAndCancel>
+  <i class="small icon-internal-crud material-icons col s12" (click)="save()">check_circle</i>
+  <i class="small icon-internal-crud material-icons col s12" (click)="cancel()">cancel</i>
+</ng-template>

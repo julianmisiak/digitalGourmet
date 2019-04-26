@@ -10,7 +10,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {
   MaterializeModule,
   MzButtonDirective,
-  MzButtonModule, MzCardModule, MzCheckboxModule,
+  MzButtonModule, MzCardModule, MzCheckboxModule, MzIconMdiModule, MzIconModule,
   MzInputModule, MzMediaModule,
   MzModalComponent,
   MzModalModule, MzNavbarModule, MzSelectModule, MzSidenavModule, MzTabModule, MzToastModule,
@@ -79,6 +79,8 @@ const appRoutes: Routes = [
     MzMediaModule,
     MzSelectModule,
     MzTabModule,
+    MzIconModule,
+    MzIconMdiModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

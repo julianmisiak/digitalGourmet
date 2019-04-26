@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MzBaseModal, MzModalService} from 'ngx-materialize';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../model/User';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {UserGeneraldataTabComponent} from './user-generaldata-tab/user-generaldata-tab.component';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-user-internal-crud',
@@ -48,7 +47,4 @@ export class UserInternalCrudComponent extends MzBaseModal implements OnInit {
   ngOnInit() {
   }
 
-  callbackFunction() {
-
-  }
 }
