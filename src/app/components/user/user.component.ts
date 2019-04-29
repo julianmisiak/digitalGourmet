@@ -35,7 +35,8 @@ export class UserComponent extends CrudComponent implements OnInit {
   public getListElement() {
     this.service.getUserList(!this.viewInactive).subscribe((data: User[]) => {
       this.userList = data;
-    }, (error: Response) => {
+    }, (error: any) => {
+      console.log(JSON.stringify(error));
       this.handlerError(error);
     });
   }

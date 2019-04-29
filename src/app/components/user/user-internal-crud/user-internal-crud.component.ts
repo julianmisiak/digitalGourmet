@@ -17,10 +17,9 @@ export class UserInternalCrudComponent extends MzBaseModal implements OnInit {
   public modalOptions: Materialize.ModalOptions = {
     dismissible: false,
     opacity: .7,
-    inDuration: 600,
+    inDuration: 500,
     outDuration: 300,
     startingTop: '100%',
-    endingTop: '10%',
     ready: (modal, trigger) => {
       console.log(modal, trigger);
     },
