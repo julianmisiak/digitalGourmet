@@ -46,6 +46,22 @@ input :focus {
   background: $primary-color-dark;
 }
 
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: $primary-color-light!important;;
+}
+
+.switch label input[type=checkbox][disabled]+.lever:after, .switch label input[type=checkbox][disabled]:checked+.lever:after {
+  background-color: $primary-color-dark!important;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: $primary-color-dark!important;
+}
+
+.switch label .lever  {
+  background-color: $primary-color-light!important;
+}
+
 app-side-nav {
   display: none;
   background-color: $primary-color-light !important;
@@ -58,3 +74,15 @@ app-side-nav {
   background-color: #323232 !important;
   color: white;
 }
+
+.table-container-internal-crud tr.active td {
+  background-color: #323232 !important;
+  color: white;
+}
+
+hr{
+  height: 2px;
+  background-color: #eeeeee ;
+  border: none;
+}
+

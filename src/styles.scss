@@ -6,7 +6,6 @@
   font-family: Roboto;
 }
 
-
 #btnSave {
   float: right;
 }
@@ -15,12 +14,19 @@
   cursor: pointer;
 }
 
-.table-container td {
-  width: 500px;
+.icons-internal-crud {
+  float: right;
+  vertical-align: middle;
+  display: inline-block!important
 }
 
-
-td, th {
-  padding: 5px 5px!important;
+.icon-internal-crud {
+  margin:10px;
+  vertical-align: middle;
 }
+
+.icon-internal-crud:hover {
+  cursor: pointer;
+}
+
 

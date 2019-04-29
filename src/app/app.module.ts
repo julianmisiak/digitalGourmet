@@ -13,7 +13,7 @@ import {
   MzButtonModule, MzCardModule, MzCheckboxModule, MzIconMdiModule, MzIconModule,
   MzInputModule, MzMediaModule,
   MzModalComponent,
-  MzModalModule, MzNavbarModule, MzSelectModule, MzSidenavModule, MzTabModule, MzToastModule,
+  MzModalModule, MzNavbarModule, MzSelectModule, MzSidenavModule, MzSwitchModule, MzTabModule, MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
 import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
@@ -81,6 +81,7 @@ const appRoutes: Routes = [
     MzTabModule,
     MzIconModule,
     MzIconMdiModule,
+    MzSwitchModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

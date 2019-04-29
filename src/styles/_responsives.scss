@@ -1,3 +1,20 @@
+.table-container td {
+  width: 500px;
+}
+
+.table-container-internal-crud td{
+  width: 300px;
+}
+
+td, th {
+  padding: 5px 5px!important;
+}
+
+.table-container-internal-crud{
+  height: 100px;
+  display: block;
+  overflow-y: auto;
+}
 
 @media screen and (max-width: 1920px) {
   .table-container {
@@ -11,6 +28,12 @@
 
   app-nav-bar {
     display: block;
+  }
+
+  .table-container-internal-crud{
+    height: 100px;
+    display: block;
+    overflow-y: auto;
   }
 }
 
@@ -29,6 +52,12 @@
     display: block;
   }
 
+  .table-container-internal-crud{
+    height: 200px;
+    display: block;
+    overflow-y: auto;
+  }
+
 }
 
 @media screen and (max-width: 767px) {
@@ -44,6 +73,12 @@
 
   app-nav-bar {
     display: none;
+  }
+
+  .table-container-internal-crud{
+    height: 200px;
+    display: block;
+    overflow-y: auto;
   }
 }
 
@@ -65,6 +100,12 @@
   app-nav-bar {
     display: none;
   }
+
+  .table-container-internal-crud{
+    height: 150px;
+    display: block;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -84,6 +125,12 @@
 
   app-nav-bar {
     display: none;
+  }
+
+  .table-container-internal-crud{
+    height: 100px;
+    display: block;
+    overflow-y: auto;
   }
 
 }

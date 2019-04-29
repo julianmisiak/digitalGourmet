@@ -1,20 +1,21 @@
 <div class="section">
   <div class="row m-valign-wrapper">
     <div class="col s12 m12">
-      <mz-modal [options]="modalOptions">
+      <mz-modal [fixedFooter]="true"  [options]="modalOptions">
         <mz-modal-header>
           <h4>Usuario</h4>
         </mz-modal-header>
         <mz-modal-content>
           <mz-tab
             [fixedTabWidth]="'true'"
-            [responsiveThreshold]="'true'"
           >
             <mz-tab-item [active]="'true'"
-                         [label]="'Datos Generales'">
+                         [label]="'Datos Generales'"
+            >
               <app-user-generaldata-tab [form]="form" [(user)]="user"></app-user-generaldata-tab>
             </mz-tab-item>
-            <mz-tab-item [label]="'Direcciones'">
+            <mz-tab-item [label]="'Direcciones'"
+            >
               <app-user-address-tab [form]="form" [(user)]="user"></app-user-address-tab>
             </mz-tab-item>
           </mz-tab>

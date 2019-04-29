@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Address} from '../../../../model/Address';
 import {FormGroup} from '@angular/forms';
 import {User} from '../../../../model/User';
-import {GeorefService} from '../../../../services/georef.service';
 
 @Component({
   selector: 'app-user-address-tab',
@@ -12,6 +11,7 @@ import {GeorefService} from '../../../../services/georef.service';
 
 export class UserAddressTabComponent implements OnInit {
   address: Address;
+  enabledField = false;
   @Input() form: FormGroup;
   @Input() user: User;
   provinceList: { data: { [key: string]: string } };
@@ -20,50 +20,20 @@ export class UserAddressTabComponent implements OnInit {
   streetList: { data: { [key: string]: string } };
   displayedColumns = ['Calle', 'Número', 'Localidad', 'Por defecto'];
   selectedRow: number = null;
-  viewInactive: false;
 
-  constructor(private georefService: GeorefService) {
-    this.getProvince();
+  constructor() {
   }
 
   public getProvince() {
-    this.georefService.getProvince().subscribe(data => {
-      const dataReciv: { [key: string]: string } = {};
-      data.provincias.forEach((location: any) => {
-        dataReciv[location.nombre] = null;
-      });
-      this.provinceList = {data: dataReciv};
-    });
   }
 
   public getDistrictList() {
-    this.georefService.getDictrictList(this.address.province).subscribe(data => {
-      const dataReciv: { [key: string]: string } = {};
-      data.departamentos.forEach((location: any) => {
-        dataReciv[location.nombre] = null;
-      });
-      this.districtList = {data: dataReciv};
-    });
   }
 
   public getLocationList() {
-    this.georefService.getLocationList(this.address.province, this.address.district).subscribe(data => {
-      const dataReciv: { [key: string]: string } = {};
-      data.localidades.forEach((location: any) => {
-        dataReciv[location.nombre] = null;
-      });
-      this.locationList = {data: dataReciv};
-    });
   }
 
   public getStreetList() {
-    this.georefService.getStreetList(this.address.district, this.address.street).subscribe(data => {
-      const dataReciv: { [key: string]: string } = {};
-      data.direcciones.forEach((location: any) => {
-        dataReciv[location.calle.nombre] = null;
-      });
-      this.streetList = {data: dataReciv};
-    });
   }
 
   public onProvinceSelectChange(value: string) {
@@ -93,39 +63,66 @@ export class UserAddressTabComponent implements OnInit {
 
   public onPostalCodeSelectChange(value: number) {
     this.address.postalCode = value;
-
   }
 
   public onNumberSelectChange(value: number) {
     this.address.number = value;
   }
 
-  public setClickedRow(user: User) {
-    if (this.selectedRow !== user.oid) {
-      this.selectedRow = user.oid;
-      this.user = user;
+  public onIsDefaultSelectChange(value: string) {
+    if (this.address.isDefault) {
+
+      this.user.addresses.forEach((data) => {
+        if (data.oid !== this.address.oid) {
+          data.isDefault = false;
+        }
+      });
+    }
+
+  }
+
+  public setClickedRow(address: Address) {
+
+    if (this.selectedRow !== address.oid) {
+      this.selectedRow = address.oid;
+      this.enabledField = true;
+      this.address = address;
     } else {
       this.selectedRow = null;
-      this.user = new User();
+      this.enabledField = false;
+      this.address = new Address();
     }
   }
 
   public new() {
     this.address = new Address();
-
+    this.enabledField = true;
   }
 
   public save() {
-    console.log('this.user: ' + JSON.stringify(this.user));
-    this.user.addresses.push(this.address);
-    this.address = null;
+    this.selectedRow = null;
+    if (this.address.oid === undefined) {
+      this.user.addresses.push(this.address);
+    }
+    this.address = new Address();
+    this.enabledField = false;
   }
 
   public cancel() {
-    this.address = null;
+    this.address = new Address();
+    this.enabledField = false;
+    this.selectedRow = null;
+  }
+
+  public delete() {
+    this.user.addresses = this.user.addresses.filter((data) => {
+     return data.oid !== this.address.oid;
+    });
   }
 
   ngOnInit() {
-    this.address = null;
+    this.address = new Address();
   }
+
+
 }
