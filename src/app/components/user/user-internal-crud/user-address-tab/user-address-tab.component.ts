@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Address} from '../../../../model/Address';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {User} from '../../../../model/User';
+import {GeorefService} from '../../../../services/georef.service';
 
 @Component({
   selector: 'app-user-address-tab',
@@ -11,7 +12,6 @@ import {User} from '../../../../model/User';
 
 export class UserAddressTabComponent implements OnInit {
   address: Address;
-  enabledField = false;
   @Input() form: FormGroup;
   @Input() user: User;
   provinceList: { data: { [key: string]: string } };
@@ -20,41 +20,119 @@ export class UserAddressTabComponent implements OnInit {
   streetList: { data: { [key: string]: string } };
   displayedColumns = ['Calle', 'Número', 'Localidad', 'Por defecto'];
   selectedRow: number = null;
+  requiredFiledMessage = 'Campo obligatorio';
+  enabledField = false;
 
-  constructor() {
+  errorMessages = {
+    province: {
+      required: this.requiredFiledMessage
+    },
+    district: {
+      required: this.requiredFiledMessage
+    },
+    location: {
+      required: this.requiredFiledMessage
+    },
+    postalCode: {
+      required: this.requiredFiledMessage
+    },
+    street: {
+      required: this.requiredFiledMessage
+    },
+    number: {
+      required: this.requiredFiledMessage
+    },
+    isDepartment: {
+      required: this.requiredFiledMessage
+    },
+    department: {
+      required: this.requiredFiledMessage
+    },
+    isDefault: {
+      required: this.requiredFiledMessage
+    }
+  };
+
+  constructor(private georefService: GeorefService, private formBuilder: FormBuilder) {
+    this.getProvince();
   }
 
   public getProvince() {
+    this.georefService.getProvince().subscribe(data => {
+      const dataReciv: { [key: string]: string } = {};
+      data.provincias.forEach((location: any) => {
+        dataReciv[location.nombre] = null;
+      });
+      this.provinceList = {data: dataReciv};
+    });
   }
 
   public getDistrictList() {
+    this.georefService.getDictrictList(this.address.province).subscribe(data => {
+      const dataReciv: { [key: string]: string } = {};
+      data.departamentos.forEach((location: any) => {
+        dataReciv[location.nombre] = null;
+      });
+      this.districtList = {data: dataReciv};
+    });
   }
 
   public getLocationList() {
+    this.georefService.getLocationList(this.address.province, this.address.district).subscribe(data => {
+      const dataReciv: { [key: string]: string } = {};
+      data.localidades.forEach((location: any) => {
+        dataReciv[location.nombre] = null;
+      });
+      this.locationList = {data: dataReciv};
+    });
   }
 
   public getStreetList() {
+    this.georefService.getStreetList(this.address.district, this.address.street).subscribe(data => {
+      const dataReciv: { [key: string]: string } = {};
+      data.direcciones.forEach((location: any) => {
+        dataReciv[location.calle.nombre] = null;
+      });
+      this.streetList = {data: dataReciv};
+    });
   }
 
   public onProvinceSelectChange(value: string) {
     this.address.province = value;
+    this.address.district = null;
+    this.address.location = null;
+    this.address.postalCode = null;
+    this.address.street = null;
+    this.address.number = null;
+    this.address.department = null;
+
     this.getDistrictList();
   }
 
   public onDiscrictSelectChange(value: string) {
     this.address.district = value;
+
+    this.address.location = null;
+    this.address.postalCode = null;
+    this.address.street = null;
+    this.address.number = null;
+    this.address.department = null;
+
     this.getLocationList();
   }
 
   public onLocationSelectChange(value: string) {
+    this.address.postalCode = null;
+    this.address.street = null;
+    this.address.number = null;
+    this.address.department = null;
+
     this.address.location = value;
   }
 
-  public onStreetSelectChange(value: string) {
-    this.address.street = value;
-  }
-
   public onStreetKeypressChange(value: string) {
+    this.address.number = null;
+    this.address.department = null;
     if (value.length > 3) {
       this.address.street = value;
       this.getStreetList();
@@ -62,11 +140,21 @@ export class UserAddressTabComponent implements OnInit {
   }
 
   public onPostalCodeSelectChange(value: number) {
+    this.address.street = null;
+    this.address.number = null;
+    this.address.department = null;
+
     this.address.postalCode = value;
   }
 
+  public onStreetSelectChange(value: string) {
+    this.address.street = value;
+  }
+
+
   public onNumberSelectChange(value: number) {
     this.address.number = value;
+    this.address.department = null;
   }
 
   public onIsDefaultSelectChange(value: string) {
@@ -78,7 +166,6 @@ export class UserAddressTabComponent implements OnInit {
         }
       });
     }
-
   }
 
   public setClickedRow(address: Address) {
@@ -86,10 +173,12 @@ export class UserAddressTabComponent implements OnInit {
     if (this.selectedRow !== address.oid) {
       this.selectedRow = address.oid;
       this.enabledField = true;
+      this.disableForm();
       this.address = address;
     } else {
       this.selectedRow = null;
       this.enabledField = false;
+      this.disableForm();
       this.address = new Address();
     }
   }
@@ -97,6 +186,7 @@ export class UserAddressTabComponent implements OnInit {
   public new() {
     this.address = new Address();
     this.enabledField = true;
+    this.disableForm();
   }
 
   public save() {
@@ -106,23 +196,48 @@ export class UserAddressTabComponent implements OnInit {
     }
     this.address = new Address();
     this.enabledField = false;
+    this.disableForm();
   }
 
   public cancel() {
     this.address = new Address();
     this.enabledField = false;
+    this.disableForm();
     this.selectedRow = null;
   }
 
   public delete() {
     this.user.addresses = this.user.addresses.filter((data) => {
-     return data.oid !== this.address.oid;
+      return data.oid !== this.address.oid;
     });
   }
 
   ngOnInit() {
     this.address = new Address();
+
+    this.form = this.formBuilder.group({
+      province: ['', this.errorMessages.province],
+      district: ['', this.errorMessages.district],
+      location: ['', this.errorMessages.location],
+      postalCode: ['', this.errorMessages.postalCode],
+      street: ['', this.errorMessages.street],
+      number: ['', this.errorMessages.number],
+      isDepartment: ['', this.errorMessages.isDepartment],
+      department: ['', this.errorMessages.department],
+      isDefault: ['', this.errorMessages.isDefault]
+    });
+
+    this.enabledField = false;
+    this.disableForm();
   }
 
+  public disableForm() {
+    if (this.enabledField) {
+      this.form.enable();
+    } else {
+      this.form.disable();
+    }
+
+  }
 
 }

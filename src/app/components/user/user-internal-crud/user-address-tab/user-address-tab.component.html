@@ -1,137 +1,150 @@
-<div class="row">
-  <div class="col s10 offset-s1">
-    <div class="row">
-      <div class="input-field col s12 m6 xl6">
-        <mz-input-container>
-          <input mz-input
-                 id="province"
-                 (change)="onProvinceSelectChange($event.target.value)"
-                 type="text"
-                 [label]="'Provincia'"
-                 [autocomplete]="provinceList"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.province"
-          >
-        </mz-input-container>
-      </div>
+<form [formGroup]="form" novalidate>
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <div class="row">
+        <div class="input-field col s12 m6 xl6">
+          <mz-input-container>
+            <input mz-input mz-validation required
+                   id="province"
+                   formControlName="province"
+                   [errorMessageResource]="errorMessages.province"
+                   (change)="onProvinceSelectChange($event.target.value)"
+                   type="text"
+                   [label]="'Provincia'"
+                   [autocomplete]="provinceList"
+                   [(ngModel)]="address.province"
+                   [validate]="true"
+            >
+          </mz-input-container>
+        </div>
 
-      <div class="input-field col s12 m6 xl6">
-        <mz-input-container>
-          <input mz-input
-                 id="distrito"
-                 (change)="onDiscrictSelectChange($event.target.value)"
-                 type="text"
-                 [label]="'Municipio'"
-                 [autocomplete]="districtList"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.district"
-          >
-        </mz-input-container>
-      </div>
+        <div class="input-field col s12 m6 xl6">
+          <mz-input-container>
+            <input mz-input mz-validation required
+                   id="district"
+                   formControlName="district"
+                   [errorMessageResource]="errorMessages.district"
+                   (change)="onDiscrictSelectChange($event.target.value)"
+                   type="text"
+                   [label]="'Municipio'"
+                   [autocomplete]="districtList"
+                   [(ngModel)]="address.district"
+                   [validate]="true"
+            >
+          </mz-input-container>
+        </div>
 
-      <div class="input-field col s12 m6 xl6">
-        <mz-input-container>
-          <input mz-input
-                 id="location"
-                 type="text"
-                 [label]="'Localidad'"
-                 [autocomplete]="locationList"
-                 (change)="onLocationSelectChange($event.target.value)"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.location"
-          >
-        </mz-input-container>
-      </div>
+        <div class="input-field col s12 m6 xl6">
+          <mz-input-container>
+            <input mz-input mz-validation required
+                   id="location"
+                   formControlName="location"
+                   [errorMessageResource]="errorMessages.location"
+                   type="text"
+                   [label]="'Localidad'"
+                   [autocomplete]="locationList"
+                   (change)="onLocationSelectChange($event.target.value)"
+                   [(ngModel)]="address.location"
+                   [validate]="true"
+            >
+          </mz-input-container>
+        </div>
 
-      <div class="input-field col s12 m6 xl6">
-        <mz-input-container>
-          <input mz-input
-                 id="postalCode"
-                 (change)="onPostalCodeSelectChange($event.target.value)"
-                 type="number"
-                 [label]="'Código Postal'"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.postalCode"
-          >
-        </mz-input-container>
-      </div>
+        <div class="input-field col s12 m6 xl6">
+          <mz-input-container>
+            <input mz-input mz-validation required
+                   id="postalCode"
+                   formControlName="postalCode"
+                   [errorMessageResource]="errorMessages.postalCode"
+                   (change)="onPostalCodeSelectChange($event.target.value)"
+                   type="number"
+                   [label]="'Código Postal'"
+                   [(ngModel)]="address.postalCode"
+            >
+          </mz-input-container>
+        </div>
 
-      <div class="input-field col s12 m6 xl6">
-        <mz-input-container>
-          <input mz-input
-                 id="street"
-                 (keypress)="onStreetKeypressChange($event.target.value)"
-                 (durationchange)="onStreetSelectChange($event.target.value)"
-                 type="text"
-                 [label]="'Calle'"
-                 [autocomplete]="streetList"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.street"
-          >
-        </mz-input-container>
-      </div>
+        <div class="input-field col s12 m6 xl6">
+          <mz-input-container>
+            <input mz-input mz-validation required
+                   id="street"
+                   formControlName="street"
+                   [errorMessageResource]="errorMessages.street"
+                   (keypress)="onStreetKeypressChange($event.target.value)"
+                   (durationchange)="onStreetSelectChange($event.target.value)"
+                   type="text"
+                   [label]="'Calle'"
+                   [autocomplete]="streetList"
+                   [(ngModel)]="address.street"
+            >
+          </mz-input-container>
+        </div>
 
-      <div class="input-field col s12 m6 xl6">
-        <mz-input-container>
-          <input mz-input
-                 id="number"
-                 (change)="onNumberSelectChange($event.target.value)"
-                 type="text"
-                 [label]="'Número'"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.number"
-          >
-        </mz-input-container>
-      </div>
-      <div class="col s12 m6 xl6">
-        <label> Es un departamento</label>
-        <mz-switch-container class="checkbox-crud">
-          <input mz-switch
-                 [class]="'checkbox-crud'"
-                 id="isDepartment"
-                 [off]="'No'"
-                 [on]="'Si'"
-                 type="checkbox"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.isDepartment"
-          >
-        </mz-switch-container>
-      </div>
+        <div class="input-field col s12 m6 xl6">
+          <mz-input-container>
+            <input mz-input mz-validation required
+                   id="number"
+                   formControlName="number"
+                   [errorMessageResource]="errorMessages.number"
+                   (change)="onNumberSelectChange($event.target.value)"
+                   type="text"
+                   [label]="'Número'"
+                   [(ngModel)]="address.number"
+            >
+          </mz-input-container>
+        </div>
+        <div class="col s12 m6 xl6">
+          <label> Es un departamento</label>
+          <mz-switch-container class="checkbox-crud">
+            <input mz-switch mz-validation required
+                   id="isDepartment"
+                   formControlName="isDepartment"
+                   [errorMessageResource]="errorMessages.isDepartment"
+                   [class]="'checkbox-crud'"
+                   [off]="'No'"
+                   [on]="'Si'"
+                   type="checkbox"
+                   [(ngModel)]="address.isDepartment"
+            >
+          </mz-switch-container>
+        </div>
 
-      <div class="input-field col s12 m6 xl6">
-        <mz-input-container>
-          <input mz-input
-                 id="department"
-                 type="text"
-                 [label]="'Departamento'"
-                 [disabled]="(!enabledField || !address.isDepartment)"
-                 [(ngModel)]="address.department"
-          >
-        </mz-input-container>
-      </div>
+        <div class="input-field col s12 m6 xl6">
+          <mz-input-container>
+            <input mz-input mz-validation required
+                   id="department"
+                   formControlName="department"
+                   [errorMessageResource]="errorMessages.department"
+                   type="text"
+                   [label]="'Departamento'"
+                   [disabled]="(!enabledField || !address.isDepartment)"
+                   [(ngModel)]="address.department"
+            >
+          </mz-input-container>
+        </div>
 
-      <div class="col s12 m6 xl6">
-        <label> Por defecto</label>
-        <mz-switch-container>
-          <input class="checkbox-crud" mz-switch
-                 id="isDefault"
-                 (change)="onIsDefaultSelectChange($event.target.value)"
-                 [off]="'No'"
-                 [on]="'Si'"
-                 type="checkbox"
-                 [disabled]="!enabledField"
-                 [(ngModel)]="address.isDefault"
-          >
-        </mz-switch-container>
+        <div class="col s12 m6 xl6">
+          <label> Por defecto</label>
+          <mz-switch-container>
+            <input class="checkbox-crud" mz-switch mz-validation required
+                   id="isDefault"
+                   formControlName="isDefault"
+                   [errorMessageResource]="errorMessages.isDefault"
+                   (change)="onIsDefaultSelectChange($event.target.value)"
+                   [off]="'No'"
+                   [on]="'Si'"
+                   type="checkbox"
+                   [(ngModel)]="address.isDefault"
+            >
+          </mz-switch-container>
+        </div>
       </div>
-
     </div>
   </div>
-</div>
-
+</form>
 <hr/>
 
-<div class="col s3 offset-s9">
+<div class="col s3 offset-s8">
   <div class="icons-internal-crud">
     <div *ngIf="(!enabledField) else acceptAndCancel">
       <i class="small icon-internal-crud material-icons" (click)="new()">add</i>
@@ -144,7 +157,6 @@
   <i class="small icon-internal-crud material-icons" (click)="delete()">delete</i>
   <i class="small icon-internal-crud material-icons" (click)="cancel()">cancel</i>
 </ng-template>
-
 
 <div class="row">
   <div class="col s10 offset-s1">
@@ -161,12 +173,11 @@
         <td>{{ row.street }}</td>
         <td>{{ row.number }}</td>
         <td>{{ row.location }}</td>
-        <td *ngIf="row.isDefault"> <i class="small material-icons">check_box</i></td>
-        <td *ngIf="!row.isDefault"> <i class="small material-icons">check_box_outline_blank</i></td>
+        <td *ngIf="row.isDefault"><i class="small material-icons">check_box</i></td>
+        <td *ngIf="!row.isDefault"><i class="small material-icons">check_box_outline_blank</i></td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
-
 
