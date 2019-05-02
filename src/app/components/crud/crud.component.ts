@@ -1,6 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {MzModalService, MzToastService} from 'ngx-materialize';
+import {PersistentObjectLogicalDelete} from '../../model/PersistentObjectLogicalDelete';
+import {User} from '../../model/User';
 
 @Component({
   selector: 'app-crud',
@@ -8,9 +10,10 @@ import {MzModalService, MzToastService} from 'ngx-materialize';
   styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
-  selectedRow: number = null;
+  @Input() selectedRow: number = null;
   viewInactive: false;
   @Output() emitEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() persistentObjectLogicalDelete: PersistentObjectLogicalDelete;
 
   constructor(public authService: AuthService, public toastService: MzToastService, public modalService: MzModalService) {
   }
@@ -40,6 +43,11 @@ export class CrudComponent implements OnInit {
     }
   }
 
-  public viewElementActive() {
+  public setClickedRow(persistentObject: PersistentObjectLogicalDelete) {
+    if (this.selectedRow !== persistentObject.oid) {
+      this.selectedRow =  persistentObject.oid;
+    } else {
+      this.selectedRow = null;
+    }
   }
 }

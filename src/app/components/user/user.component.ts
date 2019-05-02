@@ -46,13 +46,14 @@ export class UserComponent extends CrudComponent implements OnInit {
   }
 
   public setClickedRow(user: User) {
+    super.setClickedRow(user);
     if (this.selectedRow !== user.oid) {
-      this.selectedRow = user.oid;
       this.user = user;
     } else {
-      this.selectedRow = null;
       this.user = new User();
     }
+
+    console.log('this.selectedRow: ' + this.selectedRow);
   }
 
   public openServiceModal() {
