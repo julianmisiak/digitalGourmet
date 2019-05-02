@@ -14,6 +14,7 @@
                    [autocomplete]="provinceList"
                    [(ngModel)]="address.province"
                    [validate]="true"
+                   [formControlDisabled]=!enabledField
             >
           </mz-input-container>
         </div>
@@ -30,6 +31,7 @@
                    [autocomplete]="districtList"
                    [(ngModel)]="address.district"
                    [validate]="true"
+                   [formControlDisabled]=!enabledField
             >
           </mz-input-container>
         </div>
@@ -46,6 +48,7 @@
                    (change)="onLocationSelectChange($event.target.value)"
                    [(ngModel)]="address.location"
                    [validate]="true"
+                   [formControlDisabled]=!enabledField
             >
           </mz-input-container>
         </div>
@@ -60,6 +63,7 @@
                    type="number"
                    [label]="'Código Postal'"
                    [(ngModel)]="address.postalCode"
+                   [formControlDisabled]=!enabledField
             >
           </mz-input-container>
         </div>
@@ -76,6 +80,7 @@
                    [label]="'Calle'"
                    [autocomplete]="streetList"
                    [(ngModel)]="address.street"
+                   [formControlDisabled]=!enabledField
             >
           </mz-input-container>
         </div>
@@ -90,25 +95,23 @@
                    type="text"
                    [label]="'Número'"
                    [(ngModel)]="address.number"
+                   [formControlDisabled]=!enabledField
             >
           </mz-input-container>
         </div>
-        <div class="col s12 m6 xl6">
-          <label> Es un departamento</label>
-          <mz-switch-container class="checkbox-crud">
-            <input mz-switch mz-validation required
-                   id="isDepartment"
-                   formControlName="isDepartment"
-                   [errorMessageResource]="errorMessages.isDepartment"
-                   [class]="'checkbox-crud'"
-                   [off]="'No'"
-                   [on]="'Si'"
-                   type="checkbox"
-                   [(ngModel)]="address.isDepartment"
-            >
-          </mz-switch-container>
-        </div>
-
+        <mz-checkbox-container class="col s12 m6 xl6">
+          <input mz-checkbox mz-validation
+                 id="isDepartment"
+                 formControlName="isDepartment"
+                 [errorMessageResource]="errorMessages.isDepartment"
+                 class="checkbox-crud"
+                 type="checkbox"
+                 [(ngModel)]="address.isDepartment"
+                 [label]="'Es un departamento'"
+                 [filledIn]="true"
+                 [formControlDisabled]=!enabledField
+          >
+        </mz-checkbox-container>
         <div class="input-field col s12 m6 xl6">
           <mz-input-container>
             <input mz-input mz-validation required
@@ -117,27 +120,26 @@
                    [errorMessageResource]="errorMessages.department"
                    type="text"
                    [label]="'Departamento'"
-                   [disabled]="(!enabledField || !address.isDepartment)"
+                   [formControlDisabled]="(!enabledField || !address.isDepartment)"
                    [(ngModel)]="address.department"
             >
           </mz-input-container>
         </div>
 
-        <div class="col s12 m6 xl6">
-          <label> Por defecto</label>
-          <mz-switch-container>
-            <input class="checkbox-crud" mz-switch mz-validation required
-                   id="isDefault"
-                   formControlName="isDefault"
-                   [errorMessageResource]="errorMessages.isDefault"
-                   (change)="onIsDefaultSelectChange($event.target.value)"
-                   [off]="'No'"
-                   [on]="'Si'"
-                   type="checkbox"
-                   [(ngModel)]="address.isDefault"
-            >
-          </mz-switch-container>
-        </div>
+        <mz-checkbox-container class="col s12 m6 xl6">
+          <input mz-checkbox mz-validation
+                 id="isDefault"
+                 formControlName="isDefault"
+                 [errorMessageResource]="errorMessages.isDefault"
+                 class="checkbox-crud"
+                 (change)="onIsDefaultSelectChange($event.target.value)"
+                 type="checkbox"
+                 [(ngModel)]="address.isDefault"
+                 [label]="'Por defecto'"
+                 [filledIn]="true"
+                 [formControlDisabled]=!enabledField
+          >
+        </mz-checkbox-container>
       </div>
     </div>
   </div>

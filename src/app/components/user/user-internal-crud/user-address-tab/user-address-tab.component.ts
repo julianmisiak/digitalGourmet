@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Address} from '../../../../model/Address';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../model/User';
 import {GeorefService} from '../../../../services/georef.service';
+import {MzToastService} from 'ngx-materialize';
 
 @Component({
   selector: 'app-user-address-tab',
@@ -53,7 +54,7 @@ export class UserAddressTabComponent implements OnInit {
     }
   };
 
-  constructor(private georefService: GeorefService, private formBuilder: FormBuilder) {
+  constructor(private georefService: GeorefService, private formBuilder: FormBuilder, public toastService: MzToastService) {
     this.getProvince();
   }
 
@@ -173,12 +174,10 @@ export class UserAddressTabComponent implements OnInit {
     if (this.selectedRow !== address.oid) {
       this.selectedRow = address.oid;
       this.enabledField = true;
-      this.disableForm();
       this.address = address;
     } else {
       this.selectedRow = null;
       this.enabledField = false;
-      this.disableForm();
       this.address = new Address();
     }
   }
@@ -186,7 +185,6 @@ export class UserAddressTabComponent implements OnInit {
   public new() {
     this.address = new Address();
     this.enabledField = true;
-    this.disableForm();
   }
 
   public save() {
@@ -196,13 +194,12 @@ export class UserAddressTabComponent implements OnInit {
     }
     this.address = new Address();
     this.enabledField = false;
-    this.disableForm();
+    this.validateAddressDefault();
   }
 
   public cancel() {
     this.address = new Address();
     this.enabledField = false;
-    this.disableForm();
     this.selectedRow = null;
   }
 
@@ -222,22 +219,25 @@ export class UserAddressTabComponent implements OnInit {
       postalCode: ['', this.errorMessages.postalCode],
       street: ['', this.errorMessages.street],
       number: ['', this.errorMessages.number],
-      isDepartment: ['', this.errorMessages.isDepartment],
+      isDepartment: [true],
       department: ['', this.errorMessages.department],
-      isDefault: ['', this.errorMessages.isDefault]
+      isDefault: [true]
     });
 
     this.enabledField = false;
-    this.disableForm();
   }
 
-  public disableForm() {
-    if (this.enabledField) {
-      this.form.enable();
-    } else {
-      this.form.disable();
+  private validateAddressDefault() {
+    let matchingDefualt = false;
+
+    this.user.addresses.forEach((data) => {
+      if (data.isDefault) {
+        matchingDefualt = true;
+      }
+    });
+
+    if (!matchingDefualt) {
+      this.toastService.show('Debe haber una dirección por defecto', 4000);
     }
-
   }
-
 }
