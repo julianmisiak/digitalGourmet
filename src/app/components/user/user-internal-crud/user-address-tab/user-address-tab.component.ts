@@ -13,7 +13,7 @@ import {MzToastService} from 'ngx-materialize';
 
 export class UserAddressTabComponent implements OnInit {
   address: Address;
-  @Input() form: FormGroup;
+  form: FormGroup;
   @Input() user: User;
   provinceList: { data: { [key: string]: string } };
   districtList: { data: { [key: string]: string } };

@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MzBaseModal, MzModalService, MzToastService} from 'ngx-materialize';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../model/User';
-import {FormGroup} from '@angular/forms';
+import {UserGeneraldataTabComponent} from './user-generaldata-tab/user-generaldata-tab.component';
+import {UserAddressTabComponent} from './user-address-tab/user-address-tab.component';
 
 @Component({
   selector: 'app-user-internal-crud',
@@ -12,7 +13,8 @@ import {FormGroup} from '@angular/forms';
 export class UserInternalCrudComponent extends MzBaseModal implements OnInit {
   @Input() user: User;
   @Output() updateGridCallBack = new EventEmitter();
-  form: FormGroup;
+  @ViewChild(UserGeneraldataTabComponent) generalDataTab: UserGeneraldataTabComponent;
+  @ViewChild(UserAddressTabComponent) addressDataTab: UserAddressTabComponent;
 
   public modalOptions: Materialize.ModalOptions = {
     dismissible: false,
