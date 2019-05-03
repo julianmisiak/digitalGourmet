@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MzBaseModal, MzModalService} from 'ngx-materialize';
+import {MzBaseModal, MzModalService, MzToastService} from 'ngx-materialize';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../model/User';
 import {FormGroup} from '@angular/forms';
@@ -25,16 +25,16 @@ export class UserInternalCrudComponent extends MzBaseModal implements OnInit {
     },
   };
 
-  constructor(private modalService: MzModalService, private service: UserService) {
+  constructor(private modalService: MzModalService, private service: UserService, public toastService: MzToastService) {
     super();
   }
 
   public save() {
     console.log('usuarios: ' + JSON.stringify(this.user));
     this.service.save(this.user).subscribe(() => {
-      this.updateGridCallBack.emit();
+      this.toastService.show('Datos guardados correctamente', 4000);
     }, (error) => {
-      alert('Hubo un error, detalle' + error);
+      alert('Hubo un error, detalle' + JSON.stringify(error));
     });
   }
 

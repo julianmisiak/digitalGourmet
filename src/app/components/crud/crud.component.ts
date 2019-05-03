@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {MzModalService, MzToastService} from 'ngx-materialize';
 import {PersistentObjectLogicalDelete} from '../../model/PersistentObjectLogicalDelete';
-import {User} from '../../model/User';
 
 @Component({
   selector: 'app-crud',
@@ -10,12 +9,17 @@ import {User} from '../../model/User';
   styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
-  @Input() selectedRow: number = null;
-  viewInactive: false;
-  @Output() emitEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Input() persistentObjectLogicalDelete: PersistentObjectLogicalDelete;
+  @Input() selectedRow: number;
+  @Input() viewInactive: boolean;
+  @Input() persistentObject: PersistentObjectLogicalDelete;
+  @Output() newEmitter = new EventEmitter();
+  @Output() updateEmitter = new EventEmitter();
+  @Output() deleteEmitter = new EventEmitter();
+  @Output() viewActiveEmitter = new EventEmitter();
 
   constructor(public authService: AuthService, public toastService: MzToastService, public modalService: MzModalService) {
+    this.selectedRow = null;
+    this.viewInactive = false;
   }
 
   ngOnInit() {
@@ -25,15 +29,21 @@ export class CrudComponent implements OnInit {
   }
 
   public new() {
-    this.toastService.show('Datos guardados correctamente', 4000);
+    this.newEmitter.emit();
   }
 
   public update() {
-    this.toastService.show('Datos Actualizados Correctamente', 4000);
+    this.updateEmitter.emit();
   }
 
   public delete() {
+    this.deleteEmitter.emit();
     this.toastService.show('Elemento eliminado', 4000);
+    this.selectedRow = null;
+  }
+
+  public viewElementActive() {
+    this.viewActiveEmitter.emit(this.viewInactive);
   }
 
   public handlerError(error: Response) {
@@ -45,9 +55,11 @@ export class CrudComponent implements OnInit {
 
   public setClickedRow(persistentObject: PersistentObjectLogicalDelete) {
     if (this.selectedRow !== persistentObject.oid) {
-      this.selectedRow =  persistentObject.oid;
+      this.selectedRow = persistentObject.oid;
+      this.persistentObject = persistentObject;
     } else {
       this.selectedRow = null;
+      this.persistentObject = null;
     }
   }
 }

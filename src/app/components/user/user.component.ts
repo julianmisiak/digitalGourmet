@@ -18,8 +18,6 @@ export class UserComponent extends CrudComponent implements OnInit {
   userList: User[];
   user: User;
   displayedColumns = ['Usuario', 'Nombre', 'Apellido', 'Email'];
-  selectedRow: number = null;
-  viewInactive: false;
   filterInput = '';
 
   constructor(public authService: AuthService, public toastService: MzToastService,
@@ -47,13 +45,6 @@ export class UserComponent extends CrudComponent implements OnInit {
 
   public setClickedRow(user: User) {
     super.setClickedRow(user);
-    if (this.selectedRow !== user.oid) {
-      this.user = user;
-    } else {
-      this.user = new User();
-    }
-
-    console.log('this.selectedRow: ' + this.selectedRow);
   }
 
   public openServiceModal() {
@@ -68,20 +59,22 @@ export class UserComponent extends CrudComponent implements OnInit {
   }
 
   public update() {
-    this.openServiceModal();
+    this.service.getUserByID(this.selectedRow).subscribe((data) => {
+      this.user = data;
+      this.openServiceModal();
+    });
   }
 
   public delete() {
-    this.service.delete(this.user.oid).subscribe((data: boolean) => {
-      super.delete();
-      this.selectedRow = null;
+    this.service.delete(this.selectedRow).subscribe((data: boolean) => {
       this.getListElement();
     }, (error: Response) => {
       this.handlerError(error);
     });
   }
 
-  public viewElementActive() {
+  public viewElementActive(active) {
+    this.viewInactive = active;
     this.getListElement();
   }
 }

@@ -1,0 +1,18 @@
+<div>
+  <button mz-button [flat]="true" [noWaves]="true" (click)="new()">Nuevo</button>
+  <button mz-button [flat]="true" [noWaves]="true" [disabled]="selectedRow === null" (click)="update()">
+    Modificar
+  </button>
+  <button mz-button [flat]="true" [noWaves]="true" [disabled]="selectedRow === null || !persistentObject.isActive"
+          (click)="delete()">Eliminar
+  </button>
+  <mz-checkbox-container align="right">
+    <input mz-checkbox
+           class="checkbox-crud"
+           [label]="'Ver inactivos'"
+           [filledIn]="true"
+           type="checkbox"
+           [(ngModel)]="viewInactive"
+           (change)="viewElementActive()">
+  </mz-checkbox-container>
+</div>

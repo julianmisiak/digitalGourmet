@@ -45,4 +45,10 @@ export class UserService {
     const params = new HttpParams().set('oid', oid.toString());
     return this.httpClient.delete<boolean>(`${this.baseUrl}/user`, {params, headers});
   }
+
+  public getUserByID(oid: number) {
+    const headers = this.httpHeaders.getHeaders();
+    const params = new HttpParams().set('oid', oid.toString());
+    return this.httpClient.get<User>(`${this.baseUrl}/user/id`, {params, headers});
+  }
 }
