@@ -35,6 +35,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { SideNavComponent } from './navigation/side-nav/side-nav.component';
 import { UserGeneraldataTabComponent } from './components/user/user-internal-crud/user-generaldata-tab/user-generaldata-tab.component';
 import { UserAddressTabComponent } from './components/user/user-internal-crud/user-address-tab/user-address-tab.component';
+import { InternalCrudComponent } from './components/crud/internal-crud/internal-crud.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AutenticationGuardService]},
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
     FilterPipe,
     SideNavComponent,
     UserGeneraldataTabComponent,
-    UserAddressTabComponent
+    UserAddressTabComponent,
+    InternalCrudComponent
   ],
   imports: [
     BrowserModule,
