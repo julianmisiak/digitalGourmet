@@ -10,14 +10,14 @@ import {PersistentObjectLogicalDelete} from '../../model/PersistentObjectLogical
 })
 export class CrudComponent implements OnInit {
   @Input() selectedRow: number;
-  @Input() viewInactive: boolean;
+  viewInactive: boolean;
   @Input() persistentObject: PersistentObjectLogicalDelete;
   @Output() newEmitter = new EventEmitter();
   @Output() updateEmitter = new EventEmitter();
   @Output() deleteEmitter = new EventEmitter();
   @Output() viewActiveEmitter = new EventEmitter();
 
-  constructor(public authService: AuthService, public toastService: MzToastService, public modalService: MzModalService) {
+  constructor(public authService: AuthService, public toastService: MzToastService) {
     this.selectedRow = null;
     this.viewInactive = false;
   }
@@ -42,8 +42,8 @@ export class CrudComponent implements OnInit {
     this.selectedRow = null;
   }
 
-  public viewElementActive() {
-    this.viewActiveEmitter.emit(this.viewInactive);
+  public viewElementActive(viewInactive) {
+    this.viewActiveEmitter.emit(viewInactive);
   }
 
   public handlerError(error: Response) {

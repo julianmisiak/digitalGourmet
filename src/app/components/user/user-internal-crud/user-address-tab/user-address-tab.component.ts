@@ -188,13 +188,18 @@ export class UserAddressTabComponent implements OnInit {
   }
 
   public save() {
-    this.selectedRow = null;
-    if (this.address.oid === undefined) {
-      this.user.addresses.push(this.address);
+    if (!this.form.valid) {
+      this.toastService.show('Complete los campos obligatorios', 4000);
+    } else {
+
+      this.selectedRow = null;
+      if (this.address.oid === undefined) {
+        this.user.addresses.push(this.address);
+      }
+      this.address = new Address();
+      this.enabledField = false;
+      this.validateAddressDefault();
     }
-    this.address = new Address();
-    this.enabledField = false;
-    this.validateAddressDefault();
   }
 
   public cancel() {

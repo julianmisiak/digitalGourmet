@@ -22,7 +22,7 @@
         </mz-modal-content>
         <mz-modal-footer>
 
-          <button mz-button [flat]="true" (click)="save()" [disabled]="!generalDataTab.form.valid || addressDataTab.form.valid" mz-modal-close>Guardar</button>
+          <button mz-button [flat]="true" (click)="save()" [disabled]="!generalDataTab.form.valid" mz-modal-close>Guardar</button>
           <button *ngIf=" user.isActive !== undefined && !user.isActive" (click)="saveAndActive()" mz-button
                   [flat]="true" mz-modal-close>Activar y Guardar
           </button>

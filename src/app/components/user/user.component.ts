@@ -22,7 +22,7 @@ export class UserComponent extends CrudComponent implements OnInit {
 
   constructor(public authService: AuthService, public toastService: MzToastService,
               public service: UserService, public modalService: MzModalService) {
-    super(authService, toastService, modalService);
+    super(authService, toastService);
     this.user = new User();
   }
 
@@ -73,8 +73,9 @@ export class UserComponent extends CrudComponent implements OnInit {
     });
   }
 
-  public viewElementActive(active) {
-    this.viewInactive = active;
+  public viewElementActive(viewInactive: boolean) {
+    console.log('this.viewInactive: ' + this.viewInactive);
+    this.viewInactive = viewInactive;
     this.getListElement();
   }
 }
