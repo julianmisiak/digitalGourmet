@@ -21,11 +21,12 @@ export class UserInternalCrudComponent extends InternalCrudComponent implements 
   }
 
   public save() {
-    console.log('usuarios: ' + JSON.stringify(this.user));
     this.service.save(this.user).subscribe(() => {
       this.toastService.show('Datos guardados correctamente', 4000);
+      this.modal.close;
+      this.modal.closeModal();
     }, (error) => {
-      alert('Hubo un error, detalle' + JSON.stringify(error));
+      alert('Hubo un error: ' + error.error.description);
     });
   }
 

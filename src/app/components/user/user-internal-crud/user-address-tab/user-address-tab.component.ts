@@ -190,16 +190,25 @@ export class UserAddressTabComponent implements OnInit {
   public save() {
     if (!this.form.valid) {
       this.toastService.show('Complete los campos obligatorios', 4000);
-    } else {
-
-      this.selectedRow = null;
-      if (this.address.oid === undefined) {
-        this.user.addresses.push(this.address);
-      }
-      this.address = new Address();
-      this.enabledField = false;
-      this.validateAddressDefault();
+      return;
     }
+
+    if (!this.validateAddressDefault()) {
+      return;
+    }
+
+    this.selectedRow = null;
+
+    if (this.address.oid === undefined) {
+      this.user.addresses = this.user.addresses.filter((data) => {
+        return data !== this.address;
+      });
+
+      this.user.addresses.push(this.address);
+    }
+    this.address = new Address();
+    this.enabledField = false;
+
   }
 
   public cancel() {
@@ -212,6 +221,7 @@ export class UserAddressTabComponent implements OnInit {
     this.user.addresses = this.user.addresses.filter((data) => {
       return data.oid !== this.address.oid;
     });
+    this.address = new Address();
   }
 
   ngOnInit() {
@@ -235,14 +245,21 @@ export class UserAddressTabComponent implements OnInit {
   private validateAddressDefault() {
     let matchingDefualt = false;
 
+    if (this.address.isDefault) {
+      matchingDefualt = true;
+    }
     this.user.addresses.forEach((data) => {
       if (data.isDefault) {
         matchingDefualt = true;
+        return;
       }
     });
 
     if (!matchingDefualt) {
       this.toastService.show('Debe haber una dirección por defecto', 4000);
+      return false;
     }
+
+    return true;
   }
 }

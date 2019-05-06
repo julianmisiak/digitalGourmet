@@ -11,6 +11,7 @@
                    [(ngModel)]="user.userName"
                    type="text" [validate]="true"
                    [label]="'Nombre de usuario'"
+                   [formControlDisabled]= "user.oid !== undefined"
                    autocomplete="off">
           </mz-input-container>
         </div>

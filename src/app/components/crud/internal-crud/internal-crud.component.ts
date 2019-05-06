@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MzBaseModal, MzModalService} from "ngx-materialize";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {MzBaseModal, MzModalComponent, MzModalService} from 'ngx-materialize';
 import {FormGroup} from "@angular/forms";
 import {PersistentObjectLogicalDelete} from "../../../model/PersistentObjectLogicalDelete";
 
@@ -22,6 +22,7 @@ export class InternalCrudComponent extends MzBaseModal implements OnInit {
   @Input() form: FormGroup;
   @Input() persistentObject: PersistentObjectLogicalDelete;
   @Output() saveEmitter = new EventEmitter();
+  @ViewChild('modal') modal: MzModalComponent;
 
   constructor() {
     super();
