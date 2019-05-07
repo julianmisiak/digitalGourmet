@@ -1,4 +1,4 @@
-<button mz-button [flat]="true" (click)="save()" [disabled]="!form.valid">Guardar</button>
+<button mz-button [flat]="true" (click)="save()" [disabled]="!form.valid" mz-modal-close>Guardar</button>
 <button *ngIf="persistentObject.isActive !== undefined && !persistentObject.isActive" (click)="saveAndActive()" mz-button
         [flat]="true" mz-modal-close>Activar y Guardar
 </button>

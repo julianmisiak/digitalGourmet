@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Address} from '../../../../model/Address';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {User} from '../../../../model/User';
 import {GeorefService} from '../../../../services/georef.service';
 import {MzToastService} from 'ngx-materialize';

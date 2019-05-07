@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {MzBaseModal, MzModalService, MzToastService} from 'ngx-materialize';
+import {MzToastService} from 'ngx-materialize';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../model/User';
 import {UserGeneraldataTabComponent} from './user-generaldata-tab/user-generaldata-tab.component';
-import {UserAddressTabComponent} from './user-address-tab/user-address-tab.component';
-import {InternalCrudComponent} from "../../crud/internal-crud/internal-crud.component";
+import {InternalCrudComponent} from '../../crud/internal-crud/internal-crud.component';
 
 @Component({
   selector: 'app-user-internal-crud',
@@ -23,8 +22,6 @@ export class UserInternalCrudComponent extends InternalCrudComponent implements 
   public save() {
     this.service.save(this.user).subscribe(() => {
       this.toastService.show('Datos guardados correctamente', 4000);
-      this.modal.close;
-      this.modal.closeModal();
     }, (error) => {
       alert('Hubo un error: ' + error.error.description);
     });

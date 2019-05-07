@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     } else {
       this.authService.login(this.userName, this.password).subscribe(
         (response: TokenWrapper) => {
-          console.log('response.token: ' + response.token);
           this.localStorageService.saveDataInStorage(LocalStorageService.TOKEN, response.token);
           this.router.navigateByUrl('/home');
         },

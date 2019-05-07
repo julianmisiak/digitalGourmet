@@ -7,7 +7,6 @@ import {MzModalService, MzToastService} from 'ngx-materialize';
 import {UserInternalCrudComponent} from './user-internal-crud/user-internal-crud.component';
 import {CrudComponent} from '../crud/crud.component';
 
-
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -74,7 +73,6 @@ export class UserComponent extends CrudComponent implements OnInit {
   }
 
   public viewElementActive(viewInactive: boolean) {
-    console.log('this.viewInactive: ' + this.viewInactive);
     this.viewInactive = viewInactive;
     this.getListElement();
   }

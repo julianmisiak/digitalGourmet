@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {MzModalService, MzToastService} from 'ngx-materialize';
+import {MzToastService} from 'ngx-materialize';
 import {PersistentObjectLogicalDelete} from '../../model/PersistentObjectLogicalDelete';
 
 @Component({
