@@ -19,6 +19,7 @@ export class InternalCrudComponent extends MzBaseModal implements OnInit {
       console.log(modal, trigger);
     },
   };
+
   @Input() form: FormGroup;
   @Input() persistentObject: PersistentObjectLogicalDelete;
   @Output() saveEmitter = new EventEmitter();

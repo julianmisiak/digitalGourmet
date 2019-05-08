@@ -1,30 +1,33 @@
-<div class="container">
-  <div class="row">
-    <div class="col s6 offset-s3">
-      <mz-card class="mt-5 z-depth-5">
-        <mz-card-title>
-          <h4>Digital Gourmet</h4>
-        </mz-card-title>
-        <mz-card-content>
-          <mz-input-container>
-            <input mz-input
-                   [(ngModel)]="userName"
-                   type="text" [validate]="true"
-                   [label]="'Usuario'">
-          </mz-input-container>
-          <mz-input-container>
-            <input mz-input
-                   [(ngModel)]="password"
-                   type="password" [validate]="true"
-                   [label]="'Constraseña'">
-          </mz-input-container>
-        </mz-card-content>
-
-        <mz-card-action>
-          <button mz-button [flat]="true" (click)="login()">Login</button>
-        </mz-card-action>
-      </mz-card>
+<div class="header-login">
+  <label class="title-header">Digital Gourmet</label>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <mz-card class="mt-5 z-depth-5">
+          <mz-card-title>
+            <h4 class="auth-title">Ingrese sus datos</h4>
+          </mz-card-title>
+          <mz-card-content>
+            <div class="row">
+                <mz-input-container class="col s10 offset-s1">
+                  <input mz-input
+                         [(ngModel)]="userName"
+                         type="text" [validate]="true"
+                         [label]="'Usuario'">
+                </mz-input-container>
+              <mz-input-container class="col s10 offset-s1">
+                <input mz-input
+                       [(ngModel)]="password"
+                       type="password" [validate]="true"
+                       [label]="'Constraseña'">
+              </mz-input-container>
+            </div>
+          </mz-card-content>
+          <mz-card-action>
+            <button mz-button [flat]="true" (click)="login()">Login</button>
+          </mz-card-action>
+        </mz-card>
+      </div>
     </div>
   </div>
 </div>
-

@@ -1,2 +1,25 @@
+@import '../../../styles/colors';
 
+.header-login{
+  height: 200px;
+  background-color: $primary-color-dark;
+  background-image: linear-gradient(to right, $primary-color-dark , $primary-color-light);
+}
 
+.container{
+  z-index: 2;
+}
+
+.title-header{
+  color: $title-text;
+  font-size: 40px;
+  margin: 10px;
+}
+
+.auth-title{
+  line-height: 1.17;
+  margin: 0 auto;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 40px;
+}

@@ -2,15 +2,21 @@
   width: 500px;
 }
 
-.table-container-internal-crud td{
+.table-container-internal-crud td {
   width: 300px;
 }
 
 td, th {
-  padding: 5px 5px!important;
+  padding: 5px 5px !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.table-container-internal-crud{
+td {
+  max-width: 300px;
+}
+
+.table-container-internal-crud {
   height: 100px;
   display: block;
   overflow-y: auto;
@@ -30,7 +36,7 @@ td, th {
     display: block;
   }
 
-  .table-container-internal-crud{
+  .table-container-internal-crud {
     height: 100px;
     display: block;
     overflow-y: auto;
@@ -39,7 +45,7 @@ td, th {
 
 @media screen and (max-width: 1366px) {
   .table-container {
-    height: 300px;
+    height: 260px;
     display: block;
     overflow-y: auto;
   }
@@ -52,10 +58,14 @@ td, th {
     display: block;
   }
 
-  .table-container-internal-crud{
+  .table-container-internal-crud {
     height: 200px;
     display: block;
     overflow-y: auto;
+  }
+
+  td {
+    max-width: 300px;
   }
 
 }
@@ -75,10 +85,14 @@ td, th {
     display: none;
   }
 
-  .table-container-internal-crud{
+  .table-container-internal-crud {
     height: 200px;
     display: block;
     overflow-y: auto;
+  }
+
+  td {
+    max-width: 200px;
   }
 }
 
@@ -101,10 +115,19 @@ td, th {
     display: none;
   }
 
-  .table-container-internal-crud{
+  .table-container-internal-crud {
     height: 150px;
     display: block;
     overflow-y: auto;
+  }
+
+  td {
+    max-width: 100px;
+  }
+
+
+  .btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
+    padding: 0 1rem !important;;
   }
 }
 
@@ -115,10 +138,6 @@ td, th {
     overflow-y: auto;
   }
 
-  * {
-    font-size: 10px;
-  }
-
   app-side-nav {
     display: block;
   }
@@ -127,11 +146,19 @@ td, th {
     display: none;
   }
 
-  .table-container-internal-crud{
+  .table-container-internal-crud {
     height: 100px;
     display: block;
     overflow-y: auto;
   }
 
+  td {
+    max-width: 80px;
+  }
+
+  .btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
+    padding: 0 1rem !important;
+    font-size: 0.8rem !important;
+  }
 }
 

@@ -1,5 +1,9 @@
+@import '../../../styles/colors';
+
 .brand-logo{
   margin-left: 10px;
+  color: $primary-color-dark;
+  font-weight: bold;
 }
 
 #{'/deep/'} nav {

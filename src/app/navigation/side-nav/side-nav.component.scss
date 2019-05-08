@@ -1,3 +1,5 @@
+@import '../../../styles/colors';
+
 .dehaze-side-nav{
   padding: 5px;
 }
@@ -8,14 +10,14 @@
 
 .header-title{
   font-size: medium;
-  color: black;
+  color: $primary-color-dark;
   float: right;
   padding: 5px;
+  font-weight: bold;
 }
 
 .brand-logo{
   height: 160px;
-  background-color: #ee6e73;
 }
 
 

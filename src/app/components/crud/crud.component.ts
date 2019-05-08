@@ -26,6 +26,7 @@ export class CrudComponent implements OnInit {
   }
 
   public openServiceModal() {
+    this.selectedRow = null;
   }
 
   public new() {
@@ -39,7 +40,6 @@ export class CrudComponent implements OnInit {
   public delete() {
     this.deleteEmitter.emit();
     this.toastService.show('Elemento eliminado', 4000);
-    this.selectedRow = null;
   }
 
   public viewElementActive(viewInactive) {
@@ -56,10 +56,8 @@ export class CrudComponent implements OnInit {
   public setClickedRow(persistentObject: PersistentObjectLogicalDelete) {
     if (this.selectedRow !== persistentObject.oid) {
       this.selectedRow = persistentObject.oid;
-      this.persistentObject = persistentObject;
     } else {
       this.selectedRow = null;
-      this.persistentObject = null;
     }
   }
 }

@@ -12,7 +12,7 @@
                    type="text" [validate]="true"
                    [label]="'Nombre de usuario'"
                    [formControlDisabled]= "user.oid !== undefined"
-                   autocomplete="off">
+                   >
           </mz-input-container>
         </div>
 
@@ -25,7 +25,7 @@
                    [(ngModel)]="user.password"
                    type="password" [validate]="true"
                    [label]="'Constraseña'"
-                   autocomplete="off"
+                   
             >
           </mz-input-container>
         </div>
@@ -39,7 +39,7 @@
                    [(ngModel)]="user.name"
                    type="text" [validate]="true"
                    [label]="'Nombre'"
-                   autocomplete="off"
+                   
             >
           </mz-input-container>
         </div>
@@ -52,7 +52,6 @@
                    id="surname"
                    [(ngModel)]="user.surname"
                    [label]="'Apellido'"
-                   autocomplete="off"
             >
           </mz-input-container>
         </div>
@@ -65,7 +64,6 @@
                    id="idCard"
                    type="text"
                    [label]="'DNI'"
-                   autocomplete="off"
                    [(ngModel)]="user.idCard"
             >
           </mz-input-container>
@@ -82,7 +80,6 @@
                    id="options-input"
                    [label]="'Email'"
                    email="true"
-                   autocomplete="off"
             >
           </mz-input-container>
         </div>
@@ -95,7 +92,6 @@
                     [(ngModel)]="user.gender"
                     [label]="'Sexo'"
                     [placeholder]="'Seleccione una opción'"
-                    autocomplete="off"
             >
               <option *ngFor="let gender of keys(genders)"
                       [ngValue]="genders[gender]"

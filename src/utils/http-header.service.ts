@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LocalStorageService} from './local-storage.service';
 import {HttpHeaders} from '@angular/common/http';
 
@@ -7,7 +7,8 @@ import {HttpHeaders} from '@angular/common/http';
 })
 export class HttpHeaderService {
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private localStorageService: LocalStorageService) {
+  }
 
   public getHeaders(): HttpHeaders {
     return new HttpHeaders()

@@ -44,9 +44,11 @@ export class UserComponent extends CrudComponent implements OnInit {
 
   public setClickedRow(user: User) {
     super.setClickedRow(user);
+    this.user = user;
   }
 
   public openServiceModal() {
+    super.openServiceModal();
     this.modalService.open(UserInternalCrudComponent, {user: this.user}).onDestroy(() => {
       this.getListElement();
     });
@@ -65,7 +67,7 @@ export class UserComponent extends CrudComponent implements OnInit {
   }
 
   public delete() {
-    this.service.delete(this.selectedRow).subscribe((data: boolean) => {
+    this.service.delete(this.selectedRow).subscribe( () => {
       this.getListElement();
     }, (error: Response) => {
       this.handlerError(error);
