@@ -1,0 +1,13 @@
+<div class="container">
+  <dual-list [source]="roleList"
+             [key]="'oid'"
+             [display]="'name'"
+             [(destination)]="user.roles"
+             height="265px"
+             [format]="format"
+             [disabled]="disabled"
+             [filter]="filter"
+             [sort]="keepSorted"
+  >
+  </dual-list>
+</div>
