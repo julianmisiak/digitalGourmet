@@ -12,7 +12,6 @@ import {InternalCrudComponent} from '../../crud/internal-crud/internal-crud.comp
 })
 export class UserInternalCrudComponent extends InternalCrudComponent implements OnInit {
   @Input() user: User;
-  @Output() updateGridCallBack = new EventEmitter();
   @ViewChild(UserGeneraldataTabComponent) generalDataTab: UserGeneraldataTabComponent;
 
   constructor(private service: UserService, public toastService: MzToastService) {

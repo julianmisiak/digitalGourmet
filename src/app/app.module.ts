@@ -36,14 +36,18 @@ import { SideNavComponent } from './navigation/side-nav/side-nav.component';
 import { UserGeneraldataTabComponent } from './components/user/user-internal-crud/user-generaldata-tab/user-generaldata-tab.component';
 import { UserAddressTabComponent } from './components/user/user-internal-crud/user-address-tab/user-address-tab.component';
 import { InternalCrudComponent } from './components/crud/internal-crud/internal-crud.component';
+import { UserRoleTabComponent } from './components/user/user-internal-crud/user-role-tab/user-role-tab.component';
+import { RoleComponent } from './components/role/role.component';
+import { RoleInternalCrudComponent } from './components/role/role-internal-crud/role-internal-crud.component';
+import {AngularDualListBoxModule} from 'angular-dual-listbox';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AutenticationGuardService]},
   {path: 'home', component: HomeComponent, canActivate : [AutenticationGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'appComponent', component: AppComponent, canActivate : [AutenticationGuardService]},
-  {path: 'user', component: UserComponent, canActivate : [AutenticationGuardService]}
-
+  {path: 'user', component: UserComponent, canActivate : [AutenticationGuardService]},
+  {path: 'role', component: RoleComponent, canActivate : [AutenticationGuardService]}
 ];
 
 @NgModule({
@@ -59,7 +63,10 @@ const appRoutes: Routes = [
     SideNavComponent,
     UserGeneraldataTabComponent,
     UserAddressTabComponent,
-    InternalCrudComponent
+    InternalCrudComponent,
+    UserRoleTabComponent,
+    RoleComponent,
+    RoleInternalCrudComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +91,7 @@ const appRoutes: Routes = [
     MzIconModule,
     MzIconMdiModule,
     MzSwitchModule,
+    AngularDualListBoxModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
@@ -95,13 +103,14 @@ const appRoutes: Routes = [
     MzInputModule,
     MzValidationModule,
     UserInternalCrudComponent,
+    RoleInternalCrudComponent
 
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy}, LocalStorageService, HttpHeaderService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [UserInternalCrudComponent],
+  entryComponents: [UserInternalCrudComponent, RoleInternalCrudComponent],
 })
 export class AppModule {
 }

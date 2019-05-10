@@ -127,7 +127,12 @@ td {
 
 
   .btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
-    padding: 0 1rem !important;;
+    padding: 0 0.7rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .dual-list[_ngcontent-c26] .button-bar[_ngcontent-c26] button[_ngcontent-c26] {
+    width: 100%!important;
   }
 }
 
@@ -157,8 +162,12 @@ td {
   }
 
   .btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
-    padding: 0 1rem !important;
+    padding: 0 0.8rem !important;
     font-size: 0.8rem !important;
   }
+  .dual-list[_ngcontent-c26] .button-bar[_ngcontent-c26] button[_ngcontent-c26] {
+    width: 100%!important;
+  }
+
 }
 

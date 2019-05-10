@@ -35,7 +35,8 @@ export class UserService {
       email: user.email,
       createTimestamp: user.createTimestamp,
       creationUser: user.creationUser,
-      addresses: user.addresses
+      addresses: user.addresses,
+      roles: user.roles
     }, {headers});
   }
 

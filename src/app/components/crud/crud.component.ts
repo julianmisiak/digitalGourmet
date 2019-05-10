@@ -39,18 +39,18 @@ export class CrudComponent implements OnInit {
 
   public delete() {
     this.deleteEmitter.emit();
-    this.toastService.show('Elemento eliminado', 4000);
   }
 
   public viewElementActive(viewInactive) {
     this.viewActiveEmitter.emit(viewInactive);
   }
 
-  public handlerError(error: Response) {
-    console.log('error.status: ' + error.status);
+  public handlerError(error) {
     if (error.status === 403) {
       this.authService.closeSession();
     }
+    this.toastService.show(error.error.description, 4000);
+
   }
 
   public setClickedRow(persistentObject: PersistentObjectLogicalDelete) {

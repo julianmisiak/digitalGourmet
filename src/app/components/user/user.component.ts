@@ -69,6 +69,7 @@ export class UserComponent extends CrudComponent implements OnInit {
   public delete() {
     this.service.delete(this.selectedRow).subscribe( () => {
       this.getListElement();
+      this.toastService.show('Elemento eliminado', 4000);
     }, (error: Response) => {
       this.handlerError(error);
     });
