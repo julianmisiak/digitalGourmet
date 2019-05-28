@@ -169,7 +169,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="row-grid-crud" *ngFor="let row of user.addresses"
+      <tr class="row-grid-crud" *ngFor="let row of valueObject.addresses"
           (click)="setClickedRow(row)"
           [class.active]="row.oid === selectedRow" [ngClass]="{'row-inactive': !row.isActive}">
         <td>{{ row.street }}</td>

@@ -8,21 +8,21 @@
                    formControlName="userName"
                    [errorMessageResource]="errorMessages.userName"
                    id="userName"
-                   [(ngModel)]="user.userName"
+                   [(ngModel)]="valueObject.userName"
                    type="text" [validate]="true"
                    [label]="'Nombre de usuario'"
-                   [formControlDisabled]= "user.oid !== undefined"
+                   [formControlDisabled]= "valueObject.oid !== undefined"
                    >
           </mz-input-container>
         </div>
 
-        <div *ngIf="!user.oid" class="input-field col s12 m6 xl6">
+        <div *ngIf="!valueObject.oid" class="input-field col s12 m6 xl6">
           <mz-input-container>
             <input mz-input mz-validation required
                    formControlName="password"
                    [errorMessageResource]="errorMessages.password"
                    id="password"
-                   [(ngModel)]="user.password"
+                   [(ngModel)]="valueObject.password"
                    type="password" [validate]="true"
                    [label]="'Constraseña'"
                    
@@ -36,7 +36,7 @@
                    formControlName="name"
                    [errorMessageResource]="errorMessages.name"
                    id="name"
-                   [(ngModel)]="user.name"
+                   [(ngModel)]="valueObject.name"
                    type="text" [validate]="true"
                    [label]="'Nombre'"
                    
@@ -50,7 +50,7 @@
                    formControlName="surname"
                    [errorMessageResource]="errorMessages.surname"
                    id="surname"
-                   [(ngModel)]="user.surname"
+                   [(ngModel)]="valueObject.surname"
                    [label]="'Apellido'"
             >
           </mz-input-container>
@@ -64,7 +64,7 @@
                    id="idCard"
                    type="text"
                    [label]="'DNI'"
-                   [(ngModel)]="user.idCard"
+                   [(ngModel)]="valueObject.idCard"
             >
           </mz-input-container>
         </div>
@@ -75,7 +75,7 @@
                    formControlName="email"
                    [errorMessageResource]="errorMessages.email"
                    id="email"
-                   [(ngModel)]="user.email"
+                   [(ngModel)]="valueObject.email"
                    type="email"
                    id="options-input"
                    [label]="'Email'"
@@ -89,7 +89,7 @@
                     formControlName="gender"
                     [errorMessageResource]="errorMessages.gender"
                     id="gender"
-                    [(ngModel)]="user.gender"
+                    [(ngModel)]="valueObject.gender"
                     [label]="'Sexo'"
                     [placeholder]="'Seleccione una opción'"
             >

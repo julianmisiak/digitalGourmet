@@ -5,18 +5,26 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {
-  MaterializeModule,
-  MzButtonDirective,
-  MzButtonModule, MzCardModule, MzCheckboxModule, MzIconMdiModule, MzIconModule,
-  MzInputModule, MzMediaModule,
-  MzModalComponent,
-  MzModalModule, MzNavbarModule, MzSelectModule, MzSidenavModule, MzSwitchModule, MzTabModule, MzToastModule,
+  MzButtonModule,
+  MzCardModule,
+  MzCheckboxModule,
+  MzIconMdiModule,
+  MzIconModule,
+  MzInputModule,
+  MzMediaModule,
+  MzModalModule,
+  MzNavbarModule,
+  MzSelectModule,
+  MzSidenavModule,
+  MzSwitchModule,
+  MzTabModule,
+  MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
-import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {LocalStorageService} from '../utils/local-storage.service';
 import {HttpHeaderService} from '../utils/http-header.service';
 import {AngularFireModule} from 'angularfire2';
@@ -26,19 +34,19 @@ import {environment} from './environments/environment';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AutenticationGuardService} from './services/autentication-guard.service';
-import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
-import { HomeComponent } from './components/home/home.component';
-import { UserComponent } from './components/user/user.component';
-import { UserInternalCrudComponent } from './components/user/user-internal-crud/user-internal-crud.component';
-import { CrudComponent } from './components/crud/crud.component';
-import { FilterPipe } from './pipes/filter.pipe';
-import { SideNavComponent } from './navigation/side-nav/side-nav.component';
-import { UserGeneraldataTabComponent } from './components/user/user-internal-crud/user-generaldata-tab/user-generaldata-tab.component';
-import { UserAddressTabComponent } from './components/user/user-internal-crud/user-address-tab/user-address-tab.component';
-import { InternalCrudComponent } from './components/crud/internal-crud/internal-crud.component';
-import { UserRoleTabComponent } from './components/user/user-internal-crud/user-role-tab/user-role-tab.component';
-import { RoleComponent } from './components/role/role.component';
-import { RoleInternalCrudComponent } from './components/role/role-internal-crud/role-internal-crud.component';
+import {NavBarComponent} from './navigation/nav-bar/nav-bar.component';
+import {HomeComponent} from './components/home/home.component';
+import {UserComponent} from './components/user/user.component';
+import {UserInternalCrudComponent} from './components/user/user-internal-crud/user-internal-crud.component';
+import {CrudComponent} from './components/crud/crud.component';
+import {FilterPipe} from './pipes/filter.pipe';
+import {SideNavComponent} from './navigation/side-nav/side-nav.component';
+import {UserGeneraldataTabComponent} from './components/user/user-internal-crud/user-generaldata-tab/user-generaldata-tab.component';
+import {UserAddressTabComponent} from './components/user/user-internal-crud/user-address-tab/user-address-tab.component';
+import {InternalCrudComponent} from './components/crud/internal-crud/internal-crud.component';
+import {UserRoleTabComponent} from './components/user/user-internal-crud/user-role-tab/user-role-tab.component';
+import {RoleComponent} from './components/role/role.component';
+import {RoleInternalCrudComponent} from './components/role/role-internal-crud/role-internal-crud.component';
 import {AngularDualListBoxModule} from 'angular-dual-listbox';
 
 const appRoutes: Routes = [

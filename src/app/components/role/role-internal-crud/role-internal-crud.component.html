@@ -17,7 +17,7 @@
                              formControlName="name"
                              [errorMessageResource]="errorMessages.name"
                              id="userName"
-                             [(ngModel)]="role.name"
+                             [(ngModel)]="valueObject.name"
                              type="text" [validate]="true"
                              [label]="'Nombre'"
                       >
@@ -30,7 +30,7 @@
                              formControlName="description"
                              [errorMessageResource]="errorMessages.description"
                              id="description"
-                             [(ngModel)]="role.description"
+                             [(ngModel)]="valueObject.description"
                              type="text" [validate]="true"
                              [label]="'Descripción'"
                       >
@@ -45,7 +45,7 @@
         <mz-modal-footer>
           <app-internal-crud
             [form]="form"
-            [persistentObject]="role"
+            [persistentObject]="valueObject"
             (saveEmitter)="save()"
           >
           </app-internal-crud>

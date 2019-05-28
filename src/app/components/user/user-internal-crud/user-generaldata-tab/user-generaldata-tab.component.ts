@@ -11,7 +11,7 @@ import {Gender} from '../../../../model/Gender';
 
 export class UserGeneraldataTabComponent implements OnInit {
   @Input() form: FormGroup;
-  @Input() user: User;
+  @Input() valueObject: User;
   genders = Gender;
   keys = Object.keys;
 

@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8081',
   firebase: {
     apiKey: 'AIzaSyAMJo2yi-tehwI_MVWVn-Xl3PQyBKrHK0c',
     authDomain: 'dgdev-96257.firebaseapp.com',
@@ -12,7 +11,8 @@ export const environment = {
     projectId: 'dgdev-96257',
     storageBucket: 'dgdev-96257.appspot.com',
     messagingSenderId: '865954905356'
-  }
+  },
+  apiUrl: 'http://localhost:8081'
 };
 
 /*

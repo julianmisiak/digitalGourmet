@@ -1,47 +1,6 @@
-<div class="container">
-  <div class="row">
-    <div class="col s12 offset-s0  m12 l11 offset-l1 xl10 offset-xl1">
-      <mz-card class="mt-3 z-depth-5">
-        <mz-card-title>
-          <div class="row">
-            <h5 class="col s12 m6 ll6 xl6">Listado de Roles</h5>
-            <mz-input-container class="col s12 m6 ll6 xl6 crud-filter">
-              <i class="material-icons prefix">search</i>
-              <input mz-input
-                     [label]="'Filtrar'"
-                     type="text"
-                     [(ngModel)]="filterInput">
-            </mz-input-container>
-          </div>
-        </mz-card-title>
-        <mz-card-content>
-          <table class="highlight centered striped bordered table-container">
-            <thead>
-            <tr>
-              <th *ngFor="let row of displayedColumns"> {{row}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="row-grid-crud" *ngFor="let row of roleList | filter: filterInput;"
-                (click)="setClickedRow(row)"
-                [class.active]="row.oid == selectedRow" [ngClass]="{'row-inactive': !row.isActive}">
-              <td>{{ row.name }}</td>
-              <td>{{ row.description }}</td>
-            </tr>
-            </tbody>
-          </table>
-        </mz-card-content>
-        <mz-card-action>
-          <app-crud [selectedRow]="selectedRow"
-                    [persistentObject]="role"
-                    (newEmitter)="new()"
-                    (updateEmitter)="update()"
-                    (deleteEmitter)="delete()"
-                    (viewActiveEmitter)="viewElementActive($event)"
-          >
-          </app-crud>
-        </mz-card-action>
-      </mz-card>
-    </div>
-  </div>
-</div>
+<app-crud [title]= "title"
+          [displayedColumns]= "displayedColumns"
+          [displayedRows]= "displayedRows"
+          [serviceName] = "serviceName"
+>
+</app-crud>

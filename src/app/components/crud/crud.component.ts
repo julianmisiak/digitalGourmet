@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {MzToastService} from 'ngx-materialize';
+import {MzModalService, MzToastService} from 'ngx-materialize';
 import {PersistentObjectLogicalDelete} from '../../model/PersistentObjectLogicalDelete';
+import {CrudService} from '../../services/crud.service';
+import {ComponentName} from './ComponentName';
 
 @Component({
   selector: 'app-crud',
@@ -9,40 +11,66 @@ import {PersistentObjectLogicalDelete} from '../../model/PersistentObjectLogical
   styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
-  @Input() selectedRow: number;
-  viewInactive: boolean;
-  @Input() persistentObject: PersistentObjectLogicalDelete;
-  @Output() newEmitter = new EventEmitter();
-  @Output() updateEmitter = new EventEmitter();
-  @Output() deleteEmitter = new EventEmitter();
-  @Output() viewActiveEmitter = new EventEmitter();
+  @Input() title: string;
+  @Input() displayedColumns: string;
+  @Input() displayedRows: string;
+  @Input() serviceName: string;
 
-  constructor(public authService: AuthService, public toastService: MzToastService) {
-    this.selectedRow = null;
-    this.viewInactive = false;
+  rows: PersistentObjectLogicalDelete[];
+  filterInput = '';
+  viewInactive: boolean;
+  selectedRow: any = null;
+  componentName: ComponentName;
+
+  constructor(public authService: AuthService, public toastService: MzToastService,
+              public service: CrudService, public modalService: MzModalService) {
+    this.componentName = new ComponentName();
   }
 
   ngOnInit() {
+    this.service.setNameService(this.serviceName);
+    this.getListElement();
+  }
+
+  public getListElement() {
+    this.service.getList(!this.viewInactive).subscribe((data: any[]) => {
+      this.rows = data;
+    }, (error: any) => {
+      console.log(JSON.stringify(error));
+      this.handlerError(error);
+    });
   }
 
   public openServiceModal() {
-    this.selectedRow = null;
+    // @todo this.componentName.getComponetByName(this.serviceName) quitarlo, investigar como hacerlo
+
+    this.modalService.open(this.componentName.getComponetByName(this.serviceName),
+      {valueObject: this.selectedRow}).onDestroy(() => {
+      this.getListElement();
+    });
   }
 
   public new() {
-    this.newEmitter.emit();
+    this.selectedRow = null;
+    this.openServiceModal();
   }
 
   public update() {
-    this.updateEmitter.emit();
+    this.openServiceModal();
   }
 
   public delete() {
-    this.deleteEmitter.emit();
+    this.service.delete(this.selectedRow.oid).subscribe(() => {
+      this.getListElement();
+      this.toastService.show('Elemento eliminado', 4000);
+    }, (error: Response) => {
+      this.handlerError(error);
+    });
   }
 
   public viewElementActive(viewInactive) {
-    this.viewActiveEmitter.emit(viewInactive);
+    this.viewInactive = viewInactive;
+    this.getListElement();
   }
 
   public handlerError(error) {
@@ -50,12 +78,11 @@ export class CrudComponent implements OnInit {
       this.authService.closeSession();
     }
     this.toastService.show(error.error.description, 4000);
-
   }
 
   public setClickedRow(persistentObject: PersistentObjectLogicalDelete) {
-    if (this.selectedRow !== persistentObject.oid) {
-      this.selectedRow = persistentObject.oid;
+    if (this.selectedRow === null || this.selectedRow.oid !== persistentObject.oid) {
+      this.selectedRow = persistentObject;
     } else {
       this.selectedRow = null;
     }

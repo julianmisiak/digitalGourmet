@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MzToastService} from 'ngx-materialize';
-import {UserService} from '../../../services/user.service';
 import {User} from '../../../model/User';
 import {UserGeneraldataTabComponent} from './user-generaldata-tab/user-generaldata-tab.component';
 import {InternalCrudComponent} from '../../crud/internal-crud/internal-crud.component';
+import {CrudService} from '../../../services/crud.service';
 
 @Component({
   selector: 'app-user-internal-crud',
@@ -11,15 +11,15 @@ import {InternalCrudComponent} from '../../crud/internal-crud/internal-crud.comp
   styleUrls: ['./user-internal-crud.component.scss']
 })
 export class UserInternalCrudComponent extends InternalCrudComponent implements OnInit {
-  @Input() user: User;
+  @Input() valueObject: User;
   @ViewChild(UserGeneraldataTabComponent) generalDataTab: UserGeneraldataTabComponent;
 
-  constructor(private service: UserService, public toastService: MzToastService) {
+  constructor(private service: CrudService, public toastService: MzToastService) {
     super();
   }
 
   public save() {
-    this.service.save(this.user).subscribe(() => {
+    this.service.save(this.valueObject).subscribe(() => {
       this.toastService.show('Datos guardados correctamente', 4000);
     }, (error) => {
       alert('Hubo un error: ' + error.error.description);
@@ -27,11 +27,16 @@ export class UserInternalCrudComponent extends InternalCrudComponent implements 
   }
 
   public saveAndActive() {
-    this.user.isActive = true;
+    this.valueObject.isActive = true;
     this.save();
   }
 
   ngOnInit() {
+    // @todo Investigar como quitarlo. Se hizo en el caso en que sea nuevo
+
+    if (this.valueObject === null) {
+      this.valueObject = new User();
+    }
   }
 
 }

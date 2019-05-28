@@ -1,19 +1,67 @@
-<div>
-  <button mz-button [flat]="true" [noWaves]="true" (click)="new()">Nuevo</button>
-  <button mz-button [flat]="true" [noWaves]="true" [disabled]="selectedRow === null" (click)="update()">
-    Modificar
-  </button>
-  <button mz-button [flat]="true" [noWaves]="true" [disabled]="selectedRow === null || !persistentObject.isActive"
-          (click)="delete()">Eliminar
-  </button>
+<div class="container">
+  <div class="row">
+    <div class="col s12 offset-s0  m12 l11 offset-l1 xl10 offset-xl1">
+      <mz-card class="mt-3 z-depth-5">
+        <mz-card-title>
+          <div class="row">
+            <h5 class="col s12 m6 ll6 xl6">{{title}}</h5>
+            <mz-input-container class="col s12 m6 ll6 xl6 crud-filter">
+              <i class="material-icons prefix">search</i>
+              <input mz-input
+                     [label]="'Filtrar'"
+                     type="text"
+                     [(ngModel)]="filterInput">
+            </mz-input-container>
+          </div>
+        </mz-card-title>
 
-  <mz-checkbox-container align="right">
-    <input mz-checkbox
-           class="checkbox-crud"
-           [label]="'Ver inactivos'"
-           [filledIn]="true"
-           type="checkbox"
-           [(ngModel)]="viewInactive"
-           (change)="viewElementActive(viewInactive)">
-  </mz-checkbox-container>
+        <mz-card-content>
+          <table class="highlight centered striped bordered table-container">
+            <thead>
+            <th *ngFor="let row of displayedColumns"> {{row}}</th>
+            </thead>
+
+            <tbody>
+            <tr class="row-grid-crud" *ngFor="let row of rows | filter: filterInput;  let i = index"
+                (click)="setClickedRow(row)"
+                [class.active]="selectedRow && row.oid === selectedRow.oid"
+                [ngClass]="{'row-inactive': !row.isActive}">
+              <td *ngFor="let displayedRow of displayedRows"> {{row[displayedRow]}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </mz-card-content>
+
+        <mz-card-action>
+          <button mz-button
+                  [flat]="true"
+                  [noWaves]="true"
+                  (click)="new()">Nuevo
+          </button>
+          <button mz-button
+                  [flat]="true"
+                  [noWaves]="true"
+                  [disabled]="selectedRow === null"
+                  (click)="update()">Modificar
+          </button>
+          <button mz-button
+                  [flat]="true"
+                  [noWaves]="true"
+                  [disabled]="selectedRow === null || !selectedRow.isActive"
+                  (click)="delete()">Eliminar
+          </button>
+
+          <mz-checkbox-container align="right">
+            <input mz-checkbox
+                   class="checkbox-crud"
+                   [label]="'Ver inactivos'"
+                   [filledIn]="true"
+                   type="checkbox"
+                   [(ngModel)]="viewInactive"
+                   (change)="viewElementActive(viewInactive)">
+          </mz-checkbox-container>
+        </mz-card-action>
+      </mz-card>
+    </div>
+  </div>
 </div>

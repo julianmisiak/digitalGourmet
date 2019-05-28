@@ -14,7 +14,7 @@ import {MzToastService} from 'ngx-materialize';
 export class UserAddressTabComponent implements OnInit {
   address: Address;
   form: FormGroup;
-  @Input() user: User;
+  @Input() valueObject: User;
   provinceList: { data: { [key: string]: string } };
   districtList: { data: { [key: string]: string } };
   locationList: { data: { [key: string]: string } };
@@ -161,7 +161,7 @@ export class UserAddressTabComponent implements OnInit {
   public onIsDefaultSelectChange(value: string) {
     if (this.address.isDefault) {
 
-      this.user.addresses.forEach((data) => {
+      this.valueObject.addresses.forEach((data) => {
         if (data.oid !== this.address.oid) {
           data.isDefault = false;
         }
@@ -200,11 +200,11 @@ export class UserAddressTabComponent implements OnInit {
     this.selectedRow = null;
 
     if (this.address.oid === undefined) {
-      this.user.addresses = this.user.addresses.filter((data) => {
+      this.valueObject.addresses = this.valueObject.addresses.filter((data) => {
         return data !== this.address;
       });
 
-      this.user.addresses.push(this.address);
+      this.valueObject.addresses.push(this.address);
     }
     this.address = new Address();
     this.enabledField = false;
@@ -218,7 +218,7 @@ export class UserAddressTabComponent implements OnInit {
   }
 
   public delete() {
-    this.user.addresses = this.user.addresses.filter((data) => {
+    this.valueObject.addresses = this.valueObject.addresses.filter((data) => {
       return data.oid !== this.address.oid;
     });
     this.address = new Address();
@@ -248,7 +248,7 @@ export class UserAddressTabComponent implements OnInit {
     if (this.address.isDefault) {
       matchingDefualt = true;
     }
-    this.user.addresses.forEach((data) => {
+    this.valueObject.addresses.forEach((data) => {
       if (data.isDefault) {
         matchingDefualt = true;
         return;
