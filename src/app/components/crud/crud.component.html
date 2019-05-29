@@ -16,20 +16,22 @@
         </mz-card-title>
 
         <mz-card-content>
-          <table class="highlight centered striped bordered table-container">
-            <thead>
-            <th *ngFor="let row of displayedColumns"> {{row}}</th>
-            </thead>
+          <div class="table-container">
+            <table class="highlight centered striped bordered">
+              <thead>
+              <th *ngFor="let row of displayedColumns"> {{row}}</th>
+              </thead>
 
-            <tbody>
-            <tr class="row-grid-crud" *ngFor="let row of rows | filter: filterInput;  let i = index"
-                (click)="setClickedRow(row)"
-                [class.active]="selectedRow && row.oid === selectedRow.oid"
-                [ngClass]="{'row-inactive': !row.isActive}">
-              <td *ngFor="let displayedRow of displayedRows"> {{row[displayedRow]}}</td>
-            </tr>
-            </tbody>
-          </table>
+              <tbody>
+              <tr class="row-grid-crud" *ngFor="let row of rows | filter: filterInput;  let i = index"
+                  (click)="setClickedRow(row)"
+                  [class.active]="selectedRow && row.oid === selectedRow.oid"
+                  [ngClass]="{'row-inactive': !row.isActive}">
+                <td *ngFor="let displayedRow of displayedRows"> {{row[displayedRow]}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </mz-card-content>
 
         <mz-card-action>

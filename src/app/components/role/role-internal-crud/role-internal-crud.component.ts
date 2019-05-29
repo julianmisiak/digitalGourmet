@@ -4,6 +4,7 @@ import {InternalCrudComponent} from '../../crud/internal-crud/internal-crud.comp
 import {MzToastService} from 'ngx-materialize';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CrudService} from '../../../services/crud.service';
+import {Constant} from '../../../../utils/Constant';
 
 @Component({
   selector: 'app-role-internal-crud',
@@ -22,14 +23,15 @@ export class RoleInternalCrudComponent extends InternalCrudComponent implements 
     description: {}
   };
 
-  constructor(private service: CrudService, public toastService: MzToastService, private formBuilder: FormBuilder) {
+  constructor(private service: CrudService, public toastService: MzToastService,
+              private formBuilder: FormBuilder, private constant: Constant) {
     super();
   }
 
   public save() {
     console.log('this.role: ' + JSON.stringify(this.valueObject));
     this.service.save(this.valueObject).subscribe(() => {
-      this.toastService.show('Datos guardados correctamente', 4000);
+      this.toastService.show('Datos guardados correctamente', this.constant.timeMessage);
     }, (error) => {
       alert('Hubo un error: ' + error.error.description);
     });

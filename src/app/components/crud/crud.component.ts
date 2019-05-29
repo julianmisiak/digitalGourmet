@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
 import {MzModalService, MzToastService} from 'ngx-materialize';
 import {PersistentObjectLogicalDelete} from '../../model/PersistentObjectLogicalDelete';
 import {CrudService} from '../../services/crud.service';
 import {ComponentName} from './ComponentName';
+import {Constant} from "../../../utils/Constant";
 
 @Component({
   selector: 'app-crud',
@@ -22,8 +22,8 @@ export class CrudComponent implements OnInit {
   selectedRow: any = null;
   componentName: ComponentName;
 
-  constructor(public authService: AuthService, public toastService: MzToastService,
-              public service: CrudService, public modalService: MzModalService) {
+  constructor(public toastService: MzToastService,
+              public service: CrudService, public modalService: MzModalService, private constant: Constant) {
     this.componentName = new ComponentName();
   }
 
@@ -35,9 +35,6 @@ export class CrudComponent implements OnInit {
   public getListElement() {
     this.service.getList(!this.viewInactive).subscribe((data: any[]) => {
       this.rows = data;
-    }, (error: any) => {
-      console.log(JSON.stringify(error));
-      this.handlerError(error);
     });
   }
 
@@ -47,6 +44,7 @@ export class CrudComponent implements OnInit {
     this.modalService.open(this.componentName.getComponetByName(this.serviceName),
       {valueObject: this.selectedRow}).onDestroy(() => {
       this.getListElement();
+      this.selectedRow = null;
     });
   }
 
@@ -62,22 +60,13 @@ export class CrudComponent implements OnInit {
   public delete() {
     this.service.delete(this.selectedRow.oid).subscribe(() => {
       this.getListElement();
-      this.toastService.show('Elemento eliminado', 4000);
-    }, (error: Response) => {
-      this.handlerError(error);
+      this.toastService.show('Elemento eliminado', this.constant.timeMessage);
     });
   }
 
   public viewElementActive(viewInactive) {
     this.viewInactive = viewInactive;
     this.getListElement();
-  }
-
-  public handlerError(error) {
-    if (error.status === 403) {
-      this.authService.closeSession();
-    }
-    this.toastService.show(error.error.description, 4000);
   }
 
   public setClickedRow(persistentObject: PersistentObjectLogicalDelete) {

@@ -1,0 +1,164 @@
+.table-container td{
+  width: 500px;
+}
+
+.table-container-internal-crud td {
+  width: 300px;
+}
+
+td, th {
+  padding: 5px 5px !important;
+  text-overflow: ellipsis;
+  text-align: center;
+  overflow: hidden;
+}
+
+td {
+  max-width: 300px;
+}
+
+.table-container-internal-crud {
+  height: 100px;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 1920px) {
+  .table-container {
+    height: 550px;
+    display: block;
+    overflow-y: auto;
+  }
+  app-side-nav {
+    display: none;
+  }
+
+  app-nav-bar {
+    display: block;
+  }
+
+  .table-container-internal-crud {
+    height: 100px;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .table-container {
+    height: 260px;
+    overflow-y: auto;
+  }
+
+  app-side-nav {
+    display: none;
+  }
+
+  app-nav-bar {
+    display: block;
+  }
+
+  .table-container-internal-crud {
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  td {
+    max-width: 300px;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  .table-container {
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+
+  .table-container-internal-crud {
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  td {
+    max-width: 200px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .table-container {
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  * {
+    font-size: 11px;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+
+  .table-container-internal-crud {
+    height: 150px;
+    overflow-y: auto;
+  }
+
+  td {
+    max-width: 100px;
+  }
+
+
+  .btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
+    padding: 0 0.7rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .dual-list[_ngcontent-c26] .button-bar[_ngcontent-c26] button[_ngcontent-c26] {
+    width: 100%!important;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .table-container {
+    height: 150px;
+    overflow-y: auto;
+  }
+
+  app-side-nav {
+    display: block;
+  }
+
+  app-nav-bar {
+    display: none;
+  }
+
+  .table-container-internal-crud {
+    height: 100px;
+    overflow-y: auto;
+  }
+
+  td {
+    max-width: 80px;
+  }
+
+  .btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
+    padding: 0 0.8rem !important;
+    font-size: 0.8rem !important;
+  }
+  .dual-list[_ngcontent-c26] .button-bar[_ngcontent-c26] button[_ngcontent-c26] {
+    width: 100%!important;
+  }
+
+}
+

@@ -4,6 +4,7 @@ import {User} from '../../../model/User';
 import {UserGeneraldataTabComponent} from './user-generaldata-tab/user-generaldata-tab.component';
 import {InternalCrudComponent} from '../../crud/internal-crud/internal-crud.component';
 import {CrudService} from '../../../services/crud.service';
+import {Constant} from '../../../../utils/Constant';
 
 @Component({
   selector: 'app-user-internal-crud',
@@ -14,15 +15,13 @@ export class UserInternalCrudComponent extends InternalCrudComponent implements 
   @Input() valueObject: User;
   @ViewChild(UserGeneraldataTabComponent) generalDataTab: UserGeneraldataTabComponent;
 
-  constructor(private service: CrudService, public toastService: MzToastService) {
+  constructor(private service: CrudService, public toastService: MzToastService, private constant: Constant) {
     super();
   }
 
   public save() {
     this.service.save(this.valueObject).subscribe(() => {
-      this.toastService.show('Datos guardados correctamente', 4000);
-    }, (error) => {
-      alert('Hubo un error: ' + error.error.description);
+      this.toastService.show('Datos guardados correctamente', this.constant.timeMessage);
     });
   }
 

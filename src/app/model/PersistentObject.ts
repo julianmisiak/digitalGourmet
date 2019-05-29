@@ -4,4 +4,5 @@ export abstract class PersistentObject {
   public modificationUser: string;
   public createTimestamp: Date ;
   public modificationTimestamp: Date ;
+  public version: number;
 }

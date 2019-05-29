@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {User} from '../../../../model/User';
 import {GeorefService} from '../../../../services/georef.service';
 import {MzToastService} from 'ngx-materialize';
+import {Constant} from '../../../../../utils/Constant';
 
 @Component({
   selector: 'app-user-address-tab',
@@ -54,7 +55,8 @@ export class UserAddressTabComponent implements OnInit {
     }
   };
 
-  constructor(private georefService: GeorefService, private formBuilder: FormBuilder, public toastService: MzToastService) {
+  constructor(private georefService: GeorefService, private formBuilder: FormBuilder,
+              public toastService: MzToastService, private constant: Constant) {
     this.getProvince();
   }
 
@@ -189,7 +191,7 @@ export class UserAddressTabComponent implements OnInit {
 
   public save() {
     if (!this.form.valid) {
-      this.toastService.show('Complete los campos obligatorios', 4000);
+      this.toastService.show('Complete los campos obligatorios', this.constant.timeMessage);
       return;
     }
 
@@ -256,7 +258,7 @@ export class UserAddressTabComponent implements OnInit {
     });
 
     if (!matchingDefualt) {
-      this.toastService.show('Debe haber una dirección por defecto', 4000);
+      this.toastService.show('Debe haber una dirección por defecto', this.constant.timeMessage);
       return false;
     }
 

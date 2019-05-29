@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AuthService, TokenWrapper} from '../../services/auth.service';
 import {LocalStorageService} from '../../../utils/local-storage.service';
 import {MzToastService} from 'ngx-materialize';
+import {Constant} from '../../../utils/Constant';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
   constructor(private router: Router, private authService: AuthService,
-              private localStorageService: LocalStorageService, public toastService: MzToastService) {
+              private localStorageService: LocalStorageService, public toastService: MzToastService, private constant: Constant) {
   }
 
   public login() {
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home']);
         },
         (error) => {
-          this.toastService.show(error.error.description, 4000);
+          this.toastService.show(error.error.description, this.constant.timeMessage);
           console.log(JSON.stringify(error));
         }
       );

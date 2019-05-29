@@ -48,6 +48,7 @@ import {UserRoleTabComponent} from './components/user/user-internal-crud/user-ro
 import {RoleComponent} from './components/role/role.component';
 import {RoleInternalCrudComponent} from './components/role/role-internal-crud/role-internal-crud.component';
 import {AngularDualListBoxModule} from 'angular-dual-listbox';
+import {Constant} from "../utils/Constant";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AutenticationGuardService]},
@@ -115,7 +116,7 @@ const appRoutes: Routes = [
 
   ],
   providers: [
-    {provide: LocationStrategy, useClass: PathLocationStrategy}, LocalStorageService, HttpHeaderService
+    {provide: LocationStrategy, useClass: PathLocationStrategy}, LocalStorageService, HttpHeaderService, Constant
   ],
   bootstrap: [AppComponent],
   entryComponents: [UserInternalCrudComponent, RoleInternalCrudComponent],
